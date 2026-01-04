@@ -9,7 +9,7 @@ resources:
   - resources
   
 website:
-  title: "DevStart’s Workshops"
+  title: "DevStart Workshops"
   cookie-consent:
     type: implied
     style: simple 
