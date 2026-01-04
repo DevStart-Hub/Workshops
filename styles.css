@@ -1,0 +1,544 @@
+/* css styles */
+
+/* HIDE KEYWORDS */
+body main > header div.keywords {
+  display: none; /* Hides the keywords */
+}
+
+
+
+/* BOLD */
+
+/* Force bold text rendering */
+b, strong {
+  font-weight: 700 !important; /* Explicitly set bold font weight */
+}
+
+/* For headings (h1, h2, etc.) */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700 !important; /* Ensure headings render bold */
+}
+
+/* For general text with bold class */
+.text-bold {
+  font-weight: 700 !important; /* Use this class for custom bold text */
+}
+
+/* Optional: Fallback for missing font-weight in the font family */
+body {
+  font-family: "YourFontName", sans-serif; /* Ensure your font supports bold */
+  font-weight: 400; /* Set normal weight for body */
+}
+
+*:not(code):not(pre):not(kbd) {
+  text-transform: none !important;
+}
+
+
+
+
+/* COLOR LINKS */
+
+/* Subtitle Styling */
+.subtitle a {
+  color: #008080; /* Change link color */
+  text-decoration: none; /* Remove underline (optional) */
+}
+
+.subtitle a:hover {
+  color: #00b3b3; /* Optional: Change color on hover for better interactivity */
+  text-decoration: underline; /* Add underline on hover (optional) */
+}
+
+:root {
+    --bs-link-color-rgb: 0, 112, 112;
+    --bs-link-hover-color-rgb: 0, 168, 168;
+}
+
+
+
+
+/* TEXT JUSTIFICATION */
+
+/* General text justification */
+body {
+  text-align: justify;
+}
+
+/* Keep headings left-aligned */
+h1, h2, h3, h4, h5, h6 {
+  text-align: left;
+}
+
+h1 {
+  font-size: 3.5em;
+}
+
+/* Prevent ToC (inside #quarto-margin-sidebar) from being justified */
+#quarto-margin-sidebar,
+#TOC,
+#TOC ul,
+#TOC a {
+  text-align: left !important; /* Override global text justification */
+}
+
+
+
+
+/* HOME SQUARE */
+/* General Section Styling */
+.responsive-section {
+  border: 5px solid #343a40;
+  border-radius: 15px;
+  padding: 20px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  background-color: #fff;
+  gap: 20px;
+  container-type: inline-size;
+}
+
+/* Text Content Styling */
+.responsive-section .text-content {
+  flex: 1 1 66%;
+  min-width: 0;
+  text-align: center;
+}
+
+.responsive-section .title {  /* SCOPED - only inside responsive-section */
+  font-size: clamp(1.5rem, 5cqw, 3.5em);
+  font-weight: bold;
+  color: #343a40;
+  line-height: 1.1;
+  text-align: center !important;
+  hyphens: none;
+}
+
+/* Centered styling for 'for' */
+.responsive-section .small-italic.centered-for {  /* SCOPED */
+  font-size: 0.6em;
+  font-style: italic;
+  display: block;
+  text-align: center;
+  margin: 0.3em 0;
+}
+
+/* Subtitle Styling */
+.responsive-section .subtitle {  /* SCOPED */
+  font-size: clamp(0.8rem, 3cqw, 1.5em);
+  color: #343a40;
+  text-align: center !important;
+  white-space: normal;
+}
+
+/* Image Styling */
+.responsive-section .image-content {  /* SCOPED */
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 400px;
+  min-width: 100px;
+  height: 100%;
+  max-height: 300px;
+}
+
+.responsive-section img {  /* SCOPED */
+  max-width: 100%;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+  object-fit: contain;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .responsive-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .responsive-section .text-content {
+    flex: 0 0 100%;
+    text-align: center;
+  }
+  
+  .responsive-section .title {
+    font-size: clamp(1.5em, 6vw, 3em);
+    text-align: center !important;
+  }
+
+  .responsive-section .subtitle {
+    font-size: clamp(1em, 3vw, 1.5em);
+    text-align: center !important;
+  }
+
+  .responsive-section .image-content {
+    flex: 0 0 auto;
+    max-width: 250px;
+    max-height: 220px;
+  }
+}
+
+
+
+
+/* PILL */
+
+/* Badge Container to Center the Badge */
+.badge-container {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  padding: 2em; /* Add padding around the badge container for spacing */
+}
+
+/* Larger Badge Styling */
+.big-badge {
+  font-size: 1em; /* Base font size for the badge */
+  padding: 1em 2em; /* Add padding to make the badge larger */
+  text-align: center; /* Center-align text inside the badge */
+  line-height: 0.75; /* Add more spacing between lines */
+  border: 2px solid #c0c0c0; /* Slightly darker border color (gray shade) */
+  border-radius: 50px; /* Maintain rounded-pill shape */
+}
+
+/* Styling for the first line */
+.big-text {
+  font-size: 1.5em; /* Larger font size for the first line */
+  font-weight: bold; /* Optional: make it bold */
+  display: block; /* Ensure it's treated as a block for proper spacing */
+}
+
+/* Styling for the second line */
+.small-text {
+  font-size: 1em; /* Smaller font size for the second line */
+  font-weight: normal; /* Optional: ensure it's not bold */
+  display: block; /* Ensure it's treated as a block for proper spacing */
+}
+
+
+
+
+
+/* PROFILE CARD */
+.profile-container {
+    display: grid;  /* Use CSS Grid for better layout control */
+    grid-template-columns: repeat(3, 1fr);  /* Create 3 equal columns */
+    gap: 20px;  /* Add gap to space out the cards */
+    margin: 20px;  /* Add some margin for spacing around the container */
+    align-items: stretch;  /* Ensure all cards are stretched to the tallest */
+}
+
+.profile-card {
+    background: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;  /* Spread content evenly for uniform height */
+    border-radius: 4px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);  /* Add shadow for visual depth */
+    transition: transform 0.3s, box-shadow 0.3s;
+    height: 100%; /* Make sure cards take up full height of their container */
+}
+
+.profile-link {
+    text-decoration: none;  /* Remove underline from links */
+    color: inherit;  /* Inherit text color so that it doesn't change */
+    display: block;  /* Make the link cover the entire card */
+    height: 100%;  /* Ensure the link covers the full height of the card */
+    width: 100%;  /* Ensure the link covers the full width of the card */
+}
+
+.profile-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.3);  /* Stronger shadow on hover */
+}
+
+.profile-icon {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 25px 0 10px 0;
+    white-space: nowrap;  /* Prevent wrapping */
+    text-align: center;
+}
+
+.profile-position {
+    font-size: 14px;
+    color: #777;
+    text-align: center;  /* Align text in the center for consistency */
+    width: 100%;  /* Use full width */
+    margin-top: 10px;  /* Add some margin to control spacing */
+    align-self: flex-start; /* Align the position text to the top */
+}
+
+
+/* Media query for tablets and small screens */
+@media screen and (max-width: 768px) {
+    .profile-container {
+        grid-template-columns: repeat(2, 1fr);  /* Show 2 columns on medium screens */
+    }
+}
+
+/* Media query for mobile screens */
+@media screen and (max-width: 480px) {
+    .profile-container {
+        grid-template-columns: 1fr;  /* Show 1 column on small screens */
+    }
+}
+
+
+
+
+
+/* TIMELINE */
+:root {
+  --timeline-color: #28a745;
+  --past-opacity: 0.4;
+  --dot-size: 24px;
+  --timeline-icon-image: url('resources/LOGO_workshop.png');
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 140px 40px 1fr; /* Fixed width, slightly wider than before */
+  gap: 15px;
+  margin-bottom: 40px;
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+.timeline-item.past {
+  opacity: var(--past-opacity);
+}
+
+/* Date column - now with location */
+.timeline-date-container {
+  position: sticky;
+  top: 20px;
+  text-align: right;
+  align-self: start;
+  padding-top: 2px;
+}
+
+.timeline-date {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 13px;
+}
+
+.timeline-location {
+  font-size: 10px;
+  color: #7f8c8d;
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+.timeline-item.past .timeline-date {
+  color: #95a5a6;
+}
+
+.timeline-item.past .timeline-location {
+  color: #bdc3c7;
+}
+
+/* Center line with dot */
+.timeline-center {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-line {
+  position: absolute;
+  width: 4px;
+  background: var(--timeline-color);
+  top: 0;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline-item:last-child .timeline-line {
+  display: none;
+}
+
+.timeline-item.past .timeline-line {
+  background: #95a5a6;
+}
+
+/* Timeline icon */
+.timeline-icon {
+  width: var(--dot-size);
+  height: var(--dot-size);
+  background: var(--timeline-icon-image) center/contain no-repeat;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.timeline-item.past .timeline-icon {
+  opacity: 0.7;
+}
+
+/* Remove gap for last item's icon */
+.timeline-item:last-child .timeline-icon {
+  margin-top: 0;
+}
+
+/* Content column */
+.timeline-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.timeline-content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.timeline-content h3 {
+  margin: 0 0 10px 0;
+  color: #2c3e50;
+  font-size: 18px;
+}
+
+.timeline-content p {
+  margin: 0;
+  color: #7f8c8d;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.timeline-item.past .timeline-content {
+  background: #ffffffff;
+}
+
+/* Scrollable wrapper */
+.timeline-wrapper {
+  height: 40rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  background: #ffffffff;
+  border-radius: 8px;
+  border: 3px solid #ffffffff;
+  scroll-padding-top: 20px;
+}
+
+/* Auto-scroll to first non-past item */
+.timeline-item:not(.past):first-of-type {
+  scroll-margin-top: 100px;
+}
+
+/* Style the scrollbar */
+.timeline-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-thumb {
+  background: #28a745;
+  border-radius: 4px;
+}
+
+.timeline-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #218838;
+}
+
+/* Timeline container */
+.timeline-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 50px;  /* Add this line */
+  padding-bottom: 50px;
+}
+
+/* Non-clickable timeline items */
+.timeline-no-link {
+  cursor: default; /* Change cursor to show it's not clickable */
+}
+
+.timeline-no-link:hover {
+  transform: none; /* Remove hover lift effect */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Keep original shadow */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timeline-item {
+    grid-template-columns: 100px 30px 1fr;
+    gap: 10px;
+  }
+  
+  .timeline-date {
+    font-size: 11px;
+  }
+  
+  .timeline-location {
+    font-size: 9px;
+  }
+  
+  .timeline-content {
+    padding: 15px;
+  }
+  
+  .timeline-content h3 {
+    font-size: 16px;
+  }
+}
+
+
+
+
+/* Button container */
+.button-container {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  padding: 20px;
+  flex-wrap: wrap; /* Allows wrapping on very small screens */
+  justify-content: center; /* Centers buttons horizontally */
+}
+
+.button-container .btn {
+  flex: 1; /* Makes buttons grow equally */
+  min-width: 0; /* Allows shrinking */
+  max-width: 300px; /* Prevents buttons from getting too wide */
+}
+
+/* Mobile/small screens - stack vertically */
+@media (max-width: 768px) {
+  .button-container {
+    flex-direction: column; /* Stack vertically on small screens */
+  }
+  
+  .button-container .btn {
+    max-width: 100%; /* Allow full width on mobile */
+  }
+}

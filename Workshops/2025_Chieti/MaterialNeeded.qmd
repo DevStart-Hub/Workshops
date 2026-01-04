@@ -1,0 +1,38 @@
+---
+title: "Material needed"
+subtitle: "for Chieti Eye-Tracking Workshop"
+format: html
+---
+
+
+## Pre-Workshop Setup
+
+This workshop provides hands-on experience with eye-tracking data collection and analysis. In line with DevStart's commitment to open science, we'll use free, open-source software and programming languages throughout.
+
+We'll be using **Python** and **PsychoPy** for experiment creation and data collection.
+
+### Sofware Installation
+
+To ensure you're ready for the workshop, please follow our step-by-step installation guide. We've created interactive flowcharts on the DevStart website that walk you through installing everything you'll need. If you're new to these tools, simply click the buttons to navigate to the most relevant sections based on your experience level and goals.
+
+**Please complete the setup before the workshop begins.**
+
+::: {.callout-note}
+### Installation Guide
+The setup process typically takes 20-30 minutes, though some software can be complex to install. We've included alternative installation methods and solutions for common problems to ensure everything goes smoothly. If you encounter any issues, please email us at [t.ghilardi@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk) before the workshop.
+:::
+
+[![](/resources/FlowchartPython.jpg){fig-align="center" width="100"}](https://devstart.org/CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy)
+
+
+::: {.button-container}
+[Complete Setup flowchart](https://devstart.org/CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy){.btn .btn-outline-primary}
+:::
+
+### File needed
+
+In addition to the software, you'll need to download materials we'll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.
+
+::: {.button-container}
+[Download files](/ChietiFiles.zip){.btn .btn-outline-primary}
+:::

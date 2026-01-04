@@ -1,0 +1,81 @@
+project:
+  type: website
+  output-dir: docs
+  
+execute:
+  freeze: auto
+  
+resources:
+  - resources
+  
+website:
+  title: "DevStart’s Workshops"
+  cookie-consent:
+    type: implied
+    style: simple 
+    palette: dark
+    
+    
+  back-to-top-navigation: false
+  page-footer: 
+      center: |
+        <div style="display:flex; flex-direction:column; align-items:center; text-align:center; width:100%;">
+          <div style="width:80%; height:1px; background-color:rgba(0,0,0,0.2); margin-bottom:0.5rem;"></div>
+          <img src="/resources/Footer.png" style="height:2.5rem; margin-bottom:0.3rem;">
+          <div style="font-size:0.85rem;">
+            The workshop instructors are supported by grants from the European Research Council and the Leverhulme Trust
+          </div>
+        </div>
+
+
+
+
+  navbar:
+    logo: resources/LOGO_workshop.png
+
+    right:
+      - href: https://tommasoghilardi.github.io/DevStart/
+        text: DevStart
+
+      - text: "Current Workshops"
+        menu:
+          - href: Workshops/2025_Chieti/index.qmd
+            text: "Chieti University 2026"
+          - href: Workshops/2026_BCCD/index.qmd
+            text: "BCCD 2026"
+          - href: Workshops/2026_DevWorkEye/index.qmd
+            text: "Developmental Eye-tracking workshop 2026"
+
+      # - text: "Past Workshops"
+      #   menu:
+
+      #     - href: Workshops/2024_BTG/index.qmd
+      #       text: "BTG 2024"
+      #     - href: Workshops/2025_DevWorkEye/index.qmd
+    
+  sidebar:
+    - id: sidebar-chieti2026
+      contents:
+        - href: Workshops/2025_Chieti/index.qmd
+          text: "Chieti's Workshop"
+          icon: house-fill
+        - href: Workshops/2025_Chieti/Program.
+          text: "Workshop Program"
+          icon: calendar-event
+        - href: Workshops/2025_Chieti/MaterialNeeded.qmd
+          text: "Needed Material"
+          icon: laptop
+
+
+
+format:
+  html:
+   
+    theme: lux
+    css: styles.css
+    mainfont: "Roboto"
+    toc: true
+  
+    highlight-style: zenburn
+    code-block-background: true
+    code-block-border-left: "#00B3B3"

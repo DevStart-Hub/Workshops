@@ -1,0 +1,36 @@
+---
+title: "Material needed"
+subtitle: "for BCCD 2026"
+format: html
+---
+
+
+## Pre-Workshop Setup
+
+This workshop provides hands-on experience with generalized mixed effects models. In line with DevStart's commitment to open science, we'll use free, open-source software and programming languages throughout.
+
+We'll be using **R** and **Positron** for conducting the analysis.
+
+### Sofware Installation
+
+Installing R and Positron is straightforward. however if you do not have thme isntalled yet we suggest to follow our step-by-step installation guide. We've created interactive flowcharts on the DevStart website that walk you through installing everything you'll need. Simply click the buttons to see how to insta ll R and Rstudio on your operating system.
+
+**Please complete the setup before the workshop begins.**
+
+[![](/resources/FlowchartR.jpg){fig-align="center" width="100"}](https://devstart.org/CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio)
+
+
+::: {.button-container}
+[Complete Setup flowchart](https://devstart.org/CONTENT/GettingStarted/DevStartSetupGuide.html#r-and-rstudio){.btn .btn-outline-primary}
+:::
+
+### File needed
+
+In addition to the software, you'll need to download materials we'll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.
+
+::: {.button-container}
+<a href="/Workshop/2026_BCCD/Dataset.csv" download class="btn btn-outline-primary">
+  Download files
+</a>
+:::
+

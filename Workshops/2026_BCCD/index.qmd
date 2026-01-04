@@ -1,0 +1,63 @@
+---
+format: 
+  html:
+    page-layout: full
+sidebar: false
+toc: false
+
+keywords: "devstart, workshop, eye-tracking, developmental-science, open-source-tools, tobii-eye-trackers, python-experiments, r-data-analysis, mixed-effects-models, psychopy,  eye-tracking-methodologies, cognitive-research, open-science, developmental-research"
+---
+
+
+```{=html}
+<div class="responsive-section">
+  <div class="text-content">
+    <div class="title">
+        Hands-on Generalized Mixed-Effects Models
+    </div>
+  </div>
+  <div class="image-content">
+    <a href="https://tommasoghilardi.github.io/DevStart/" target="_blank" rel="noopener noreferrer">
+      <img src="../../resources/LOGO_workshop.png" alt="Devstart Workshop">
+    </a>
+  </div>
+</div>
+
+<div class="badge-container">
+  <span class="badge rounded-pill bg-light big-badge">
+    <span class="big-text">15 January 2026</span><br>
+    <span class="small-text">BCCD 2026 Conference</span>
+  </span>
+</div>
+```
+## About the Workshop
+
+This workshop is part of the BCCD 2026 conference pre-conference events and provides a hands-on introduction to Generalized Mixed-Effects Models (GLMMs) in R for developmental and comparative research.
+
+Developmental data are often messy: participants respond differently to stimuli, fatigue over trials, and outcomes are frequently non-normal (right-skewed reaction times, binary choices, count data). This workshop teaches you to build statistical models that match your data's complexity—from simple linear models to GLMMs with appropriate distributions and random effects structures.
+
+We'll follow a hands-on, live-coding approach with micro-exercises using a "run → tweak → interpret" structure. Working primarily with eye-tracking data, the methods generalize to EEG, accuracy, and count data. All code will be shared for reuse in your own projects.
+
+By the end, participants will be able to choose appropriate models for their data, specify random effects that match their design, and implement reproducible analysis pipelines for publication-ready results.
+
+You can check the full workshop details and register through the:
+
+::: {.button-container}
+[Conference page](https://bcccd.org/workshop.htm#tab3){.btn .btn-outline-primary}
+:::
+
+## Pre-Workshop Preparation
+
+To ensure a smooth workshop experience, please install the required software and download necessary materials beforehand. All setup instructions and resources are available below:
+
+::: {.button-container}
+[Software & Materials](MaterialNeeded.qmd){.btn .btn-outline-primary}
+:::
+
+## Contact Us
+
+If you have any questions or need assistance with setup before the workshop, please contact us:
+
+- Francesco Poli: [francesco.poli@mrc-cbu.cam.ac.uk](mailto:francesco.poli@mrc-cbu.cam.ac.uk)
+- Tommaso Ghilardi: [t.ghilardi@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk)
+

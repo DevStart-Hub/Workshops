@@ -1,0 +1,76 @@
+---
+title: "Program"
+subtitle: "for Chieti's Eye-Tracking Workshop"
+format: html
+---
+
+## Program
+
+This is our planned program for the workshop. However, we believe in keeping things interactive and responsive to the group's needs, so we'll adapt the schedule and content based on questions, interests, and how things unfold during the sessions.
+
+### Day 1
+
+***Learn how to collect data***
+
+**9:00 - 10:00: Python setup and troubleshooting**\
+Ensure Python environment is properly configured. If time permits, we'll introduce Positron.
+
+**10:00 - 11:30: Introduction to eye-tracking**\
+***Core concepts and practical considerations:***
+
+-   How eye-tracking works and main measurement principles
+-   Screen-based vs. glasses-based systems (we'll focus on screen-based)
+-   Environmental factors: room setup, lighting, participant positioning
+-   Infant-specific considerations: attention span, engagement strategies, developmental changes in vision
+-   Available measures and their applications (fixations, saccades, pupil size, AOIs)
+
+*Break*
+
+**11:45 - 12:30: Create a study in PsychoPy (Part 1)**\
+Building the basics: create window, load and display stimuli.
+
+*Lunch*
+
+**13:45 - 14:30: Create a study in PsychoPy (Part 2)**\
+Structure trials and finalize your experiment.
+
+**14:30 - 15:15: Q&A - Experimental design**\
+Collaborative discussion about your experimental ideas and PsychoPy implementation strategies.
+
+**15:15 - 15:45: Basics of tobii_research**\
+Brief overview of the Python library that powers eye-tracker communication.
+
+*Break*
+
+**16:00 - 17:00: Calibration and data collection using DeToX** \
+We'll introduce DeToX, our Python package for controlling Tobii eye-trackers in developmental research. Then we'll dive into hands-on practice with calibration procedures and live data collection.
+
+**17:00 - 17:30: Q&A - Eye-tracking interaction** Open discussion for any remaining questions or clarifications.
+
+### Day 2
+
+***Preprocess the collected data***
+
+**9:30 - 10:00: Recap and Q&A**\
+Review Day 1 concepts and address any questions before diving into data processing.
+
+**10:00 - 11:30: Extracting fixations from raw data using I2MC**\
+Learn to identify fixations from raw gaze coordinates using the I2MC algorithm (Identification by 2-Means Clustering).
+
+*Break*
+
+**11:45 - 12:30: Eye-tracking measures**\
+Overview of common dependent variables: dwell time, first fixation, number of fixations and preprocessing concepts: TOI, AOI.
+
+*Lunch*
+
+**14:00 - 15:30: Extract measures of interest (Part 1)**\
+Hands-on practice extracting measures from your processed data.
+
+*Break*
+
+**15:45 - 16:45: Extract measures of interest (Part 2)**\
+Hands-on practice extracting measures from your processed data.
+
+**16:45 - 17:30: Final Q&A and wrap-up**\
+Address remaining questions and discuss next steps for implementing eye-tracking in your own research.

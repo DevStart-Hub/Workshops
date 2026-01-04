@@ -1,0 +1,131 @@
+---
+format: 
+  html:
+    page-layout: full
+
+toc: false
+title: "DevStart's Workshops"
+title-meta: "DevStart's Workshops"
+description-meta: "Join the first Eye-Tracking Workshop for Developmental Scientists, hosted by DevStart on April 3-4, 2025, in Bloomsbury, London. Learn to design, implement, and analyze eye-tracking experiments using open-source tools like Python and R. This two-day hands-on workshop covers everything from data collection with Tobii hardware to advanced analysis with mixed-effects models, ensuring skills are accessible and widely applicable."
+keywords: "devstart, workshop, eye-tracking, developmental-science, open-source-tools, tobii-eye-trackers, python-experiments, r-data-analysis, mixed-effects-models, psychopy,  eye-tracking-methodologies, cognitive-research, open-science, developmental-research"
+---
+
+<img src="resources/LOGO_workshop.png" alt="DevStart Workshops Logo" style="float: right; margin-left: 20px;margin-right: 20px; margin-bottom: 20px; max-width: 200px;"/><br>
+
+On top of creating and maintaining [DevStart](devstart.org) we sometimes give workshops on the themes we cover. These workshops sometimes are part of larger events like conferences, bigger workshops, or summer schools, and sometimes we organize them on our own. <br><br> This website serves us as a small hub to provide the participants of each specific workshop with all the relevant information, materials, and resources as sometimes these are slightly different from one event to another. <br><br><br>
+
+### Topics
+
+Our workshops cover different topics including:
+
+<details>
+<summary>Eye-Tracking</summary>
+
+- Design developmentally appropriate eye-tracking experiments
+- Collect data using DeToX, our Python package for Tobii eye-trackers
+- Preprocess data with fixation classification methods optimized for young participants
+- Analyze gaze patterns and attention measures
+
+</details>
+
+<details>
+<summary>Statistical Analysis</summary>
+
+- Linear and generalized mixed-effects models for complex developmental designs
+- Bayesian statistical modelling
+- Publication-ready data visualization
+
+</details>
+
+and we are working on expanding our themes and topics even further! 
+<br>
+
+## Our workshops past and future..
+
+Want to check what we are planning and working on?? here is a list of our workshops both future one and old one we did.
+
+```{r}
+#| label: timeline extraction from csv
+#| echo: false
+#| output: false
+
+library(readr)
+
+# Read timeline data
+timeline_data <- read_csv("WorkshopsTimeline.csv", show_col_types = FALSE)
+
+# Find the current event index
+current_indices <- which(timeline_data$current == "TRUE")
+current_index <- if(length(current_indices) > 0) current_indices[1] else NA
+
+# Build HTML string
+html_output <- '<div class="timeline-wrapper">\n  <div class="timeline-container">\n\n'
+
+# Generate timeline items
+for (i in 1:nrow(timeline_data)) {
+  item <- timeline_data[i, ]
+  
+  # Determine classes
+  classes <- "timeline-item"
+  if (!is.na(current_index) && i < current_index) {
+    classes <- paste(classes, "past")
+  }
+  
+  # Add ID for current event
+  id_attr <- ""
+  if (!is.na(item$current) && item$current == "TRUE") {
+    id_attr <- ' id="current-event"'
+  }
+  
+  # Build location HTML (if location column exists)
+  location_html <- ""
+  if ("location" %in% names(item) && !is.na(item$location)) {
+    location_html <- sprintf('        <div class="timeline-location">%s</div>\n', item$location)
+  }
+  
+  # Check if link exists and determine tag type
+  has_link <- !is.na(item$link) && item$link != ""
+  if (has_link) {
+    content_open <- sprintf('      <a href="%s" class="timeline-content">\n', item$link)
+    content_close <- '      </a>\n'
+  } else {
+    content_open <- '      <div class="timeline-content timeline-no-link">\n'
+    content_close <- '      </div>\n'
+  }
+  
+  # Build HTML for this item
+  html_output <- paste0(html_output,
+    sprintf('    <div class="%s"%s>\n', classes, id_attr),
+    '      <div class="timeline-date-container">\n',
+    sprintf('        <div class="timeline-date">%s</div>\n', item$date),
+    location_html,
+    '      </div>\n',
+    '      <div class="timeline-center">\n',
+    '        <div class="timeline-line"></div>\n',
+    '        <div class="timeline-icon"></div>\n',
+    '      </div>\n',
+    content_open,
+    sprintf('        <h3>%s</h3>\n', item$title),
+    sprintf('        <p>%s</p>\n', item$description),
+    content_close,
+    '    </div>\n\n'
+  )
+}
+
+# Close timeline wrapper
+html_output <- paste0(html_output, '  </div>\n</div>\n')
+```
+
+```{=html}
+`r html_output`
+```
+
+## Interested in Hosting a Workshop?
+
+Don't see a workshop that fits your needs? We'd love to collaborate with you! Whether you're organizing a conference, summer school, or institutional training event, we can design a customized eye-tracking workshop tailored to your group's specific interests and skill levels.
+
+**Get in touch:**
+
+-   Tommaso Ghilardi: [t.ghilardi\@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk)
+-   Francesco Poli: [francesco.poli\@mrc-cbu.cam.ac.uk](mailto:francesco.poli@mrc-cbu.cam.ac.uk)
+-   Giulia Serino: [g.serino\@bbk.ac.uk](mailto:g.serino@bbk.ac.uk)
