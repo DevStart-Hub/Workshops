@@ -12,7 +12,7 @@ keywords: "devstart, workshop, eye-tracking, developmental-science, open-source-
 
 <img src="resources/LOGO_workshop.png" alt="DevStart Workshops Logo" style="float: right; margin-left: 20px;margin-right: 20px; margin-bottom: 20px; max-width: 200px;"/><br>
 
-On top of creating and maintaining [DevStart](devstart.org) we sometimes give workshops on the themes we cover. These workshops sometimes are part of larger events like conferences, bigger workshops, or summer schools, and sometimes we organize them on our own. <br><br> This website serves us as a small hub to provide the participants of each specific workshop with all the relevant information, materials, and resources as sometimes these are slightly different from one event to another. <br><br><br>
+DevStart Workshops offer hands-on training in eye-tracking methodology, statistical analysis, and programming for cognitive scientists. The topics of our workshops are always covered on [DevStart](devstart.org) too. We run them both independently and as part of larger events (e.g., conferences, summer schools, or workshop series). <br><br> This website serves us as a hub to provide the participants of each specific workshop with all the relevant information, materials, and resources. <br><br><br>
 
 ### Topics
 
@@ -21,18 +21,18 @@ Our workshops cover different topics including:
 <details>
 <summary>Eye-Tracking</summary>
 
-- Design developmentally appropriate eye-tracking experiments
+- Design eye-tracking experiments (also for infants and children)
 - Collect data using DeToX, our Python package for Tobii eye-trackers
 - Preprocess data with fixation classification methods optimized for young participants
-- Analyze gaze patterns and attention measures
+- Analyze gaze and pupil data
 
 </details>
 
 <details>
 <summary>Statistical Analysis</summary>
 
-- Linear and generalized mixed-effects models for complex developmental designs
-- Bayesian statistical modelling
+- Linear and generalized mixed-effects modelling
+- Bayesian modelling
 - Publication-ready data visualization
 
 </details>
@@ -40,9 +40,9 @@ Our workshops cover different topics including:
 and we are working on expanding our themes and topics even further! 
 <br>
 
-## Our workshops past and future..
+## Our workshops, past and future
 
-Want to check what we are planning and working on?? here is a list of our workshops both future one and old one we did.
+If you're interested in our past events or you don't want to miss our next ones, here's a full list of our workshops:
 
 ```{r}
 #| label: timeline extraction from csv
@@ -122,7 +122,7 @@ html_output <- paste0(html_output, '  </div>\n</div>\n')
 
 ## Interested in Hosting a Workshop?
 
-Don't see a workshop that fits your needs? We'd love to collaborate with you! Whether you're organizing a conference, summer school, or institutional training event, we can design a customized eye-tracking workshop tailored to your group's specific interests and skill levels.
+Don't see a workshop that fits your needs? We'd love to collaborate with you! Whether you're organizing a conference, summer school, or institutional training event, we can design a customized workshop tailored to your group's specific interests and skill levels.
 
 **Get in touch:**
 
