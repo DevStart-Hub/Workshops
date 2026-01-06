@@ -39,7 +39,7 @@ website:
 
       - text: "Current Workshops"
         menu:
-          - href: Workshops/2025_Chieti/index.qmd
+          - href: Workshops/2026_Chieti/index.qmd
             text: "Chieti University 2026"
           - href: Workshops/2026_BCCD/index.qmd
             text: "BCCD 2026"
@@ -56,17 +56,24 @@ website:
   sidebar:
     - id: sidebar-chieti2026
       contents:
-        - href: Workshops/2025_Chieti/index.qmd
+        - href: Workshops/2026_Chieti/index.qmd
           text: "Chieti's Workshop"
           icon: house-fill
-        - href: Workshops/2025_Chieti/Program.
+        - href: Workshops/2026_Chieti/Program.qmd
           text: "Workshop Program"
           icon: calendar-event
-        - href: Workshops/2025_Chieti/MaterialNeeded.qmd
+        - href: Workshops/2026_Chieti/MaterialNeeded.qmd
           text: "Needed Material"
           icon: laptop
 
-
+    - id: sidebar-bccd2026
+      contents:
+        - href: Workshops/2026_BCCD/index.qmd
+          text: "Chieti's Workshop"
+          icon: house-fill
+        - href: Workshops/2026_BCCD/MaterialNeeded.qmd
+          text: "Needed Material"
+          icon: laptop
 
 format:
   html:

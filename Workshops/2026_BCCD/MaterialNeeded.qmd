@@ -29,8 +29,6 @@ Installing R and Positron is straightforward. however if you do not have thme is
 In addition to the software, you'll need to download materials we'll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.
 
 ::: {.button-container}
-<a href="/Workshop/2026_BCCD/Dataset.csv" download class="btn btn-outline-primary">
-  Download files
-</a>
+{{< downloadthis Dataset.csv label="Download files" class="btn-outline-primary" >}}
 :::
 
