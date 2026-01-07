@@ -19,7 +19,9 @@ To ensure you're ready for the workshop, please follow our step-by-step installa
 
 ::: {.callout-note}
 ### Installation Guide
-The setup process typically takes 20-30 minutes, though some software can be complex to install. We've included alternative installation methods and solutions for common problems to ensure everything goes smoothly. If you encounter any issues, please email us at [t.ghilardi@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk) before the workshop.
+The setup process typically takes 20-30 minutes, though some software can be complex to install. We've included alternative installation methods and solutions for common problems to ensure everything goes smoothly.
+
+Please do not worry if something goes wrong, as these installations can sometimes be complicated. We will try to help you troubleshoot on the day of the workshop! If you encounter any major issues please email us at [t.ghilardi@bbk.ac.uk](mailto:t.ghilardi@bbk.ac.uk).
 :::
 
 [![](/resources/FlowchartPython.jpg){fig-align="center" width="100"}](https://devstart.org/CONTENT/GettingStarted/DevStartSetupGuide.html#python-and-psychopy)
@@ -34,5 +36,5 @@ The setup process typically takes 20-30 minutes, though some software can be com
 In addition to the software, you'll need to download materials we'll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.
 
 ::: {.button-container}
-{{< downloadthis ChietiFiles.zip label="Download files" class="btn-outline-primary" >}}
+{{< downloadthis ChietiWorkshopFiles.zip dname="ChietiWorkshopFiles" label="Download files" class="btn-outline-primary" >}}
 :::

@@ -1,5 +1,63 @@
 [
   {
+    "objectID": "Workshops/2026_DevWorkEye/index.html",
+    "href": "Workshops/2026_DevWorkEye/index.html",
+    "title": "DevStart Workshops",
+    "section": "",
+    "text": "Eye-tracking Workshop\n      for\n      Developmental scientists"
+  },
+  {
+    "objectID": "Workshops/2026_DevWorkEye/index.html#details-are-coming-soon",
+    "href": "Workshops/2026_DevWorkEye/index.html#details-are-coming-soon",
+    "title": "DevStart Workshops",
+    "section": "DETAILS ARE COMING SOON…",
+    "text": "DETAILS ARE COMING SOON…"
+  },
+  {
+    "objectID": "Workshops/2026_Chieti/MaterialNeeded.html",
+    "href": "Workshops/2026_Chieti/MaterialNeeded.html",
+    "title": "Material needed",
+    "section": "",
+    "text": "This workshop provides hands-on experience with eye-tracking data collection and analysis. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using Python and PsychoPy for experiment creation and data collection.\n\n\nTo ensure you’re ready for the workshop, please follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. If you’re new to these tools, simply click the buttons to navigate to the most relevant sections based on your experience level and goals.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nInstallation Guide\n\n\n\nThe setup process typically takes 20-30 minutes, though some software can be complex to install. We’ve included alternative installation methods and solutions for common problems to ensure everything goes smoothly.\nPlease do not worry if something goes wrong, as these installations can sometimes be complicated. We will try to help you troubleshoot on the day of the workshop! If you encounter any major issues please email us at t.ghilardi@bbk.ac.uk.\n\n\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "crumbs": [
+      "DevStart",
+      "Needed Material"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_Chieti/MaterialNeeded.html#pre-workshop-setup",
+    "href": "Workshops/2026_Chieti/MaterialNeeded.html#pre-workshop-setup",
+    "title": "Material needed",
+    "section": "",
+    "text": "This workshop provides hands-on experience with eye-tracking data collection and analysis. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using Python and PsychoPy for experiment creation and data collection.\n\n\nTo ensure you’re ready for the workshop, please follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. If you’re new to these tools, simply click the buttons to navigate to the most relevant sections based on your experience level and goals.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nInstallation Guide\n\n\n\nThe setup process typically takes 20-30 minutes, though some software can be complex to install. We’ve included alternative installation methods and solutions for common problems to ensure everything goes smoothly.\nPlease do not worry if something goes wrong, as these installations can sometimes be complicated. We will try to help you troubleshoot on the day of the workshop! If you encounter any major issues please email us at t.ghilardi@bbk.ac.uk.\n\n\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "crumbs": [
+      "DevStart",
+      "Needed Material"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_BCCD/MaterialNeeded.html",
+    "href": "Workshops/2026_BCCD/MaterialNeeded.html",
+    "title": "Material needed",
+    "section": "",
+    "text": "This workshop provides hands-on experience with generalized mixed effects models. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using R and Positron for conducting the analysis.\n\n\nInstalling R and Positron is straightforward. however if you do not have thme isntalled yet we suggest to follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. Simply click the buttons to see how to insta ll R and Rstudio on your operating system.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "crumbs": [
+      "DevStart",
+      "Needed Material"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_BCCD/MaterialNeeded.html#pre-workshop-setup",
+    "href": "Workshops/2026_BCCD/MaterialNeeded.html#pre-workshop-setup",
+    "title": "Material needed",
+    "section": "",
+    "text": "This workshop provides hands-on experience with generalized mixed effects models. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using R and Positron for conducting the analysis.\n\n\nInstalling R and Positron is straightforward. however if you do not have thme isntalled yet we suggest to follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. Simply click the buttons to see how to insta ll R and Rstudio on your operating system.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "crumbs": [
+      "DevStart",
+      "Needed Material"
+    ]
+  },
+  {
     "objectID": "Workshops/2024_BTG/index.html",
     "href": "Workshops/2024_BTG/index.html",
     "title": "BTG 2024",
@@ -28,44 +86,25 @@
     "text": "Calibration\nWe received a question about the calibration. How to change the focus time that the eye-tracking uses to record samples for each calibration point. Luckily, the function from the Psychopy_tobii_infant repository allows for an additional argument that specifies how long we want the focus time (default = 0.5s). Thus, you can simply change it by running it with a different value.\nHere below we changed the example of Calibrating eye-tracking by increasing the focus_time to 2s. You can increase or decrease it based on your needs!!\nimport os\nfrom psychopy import visual, sound\n\n# import Psychopy tobii infant\nos.chdir(r\"C:\\Users\\tomma\\Desktop\\EyeTracking\\Files\\Calibration\")\nfrom psychopy_tobii_infant import TobiiInfantController\n\n\n#%% window and stimuli\nwinsize = [1920, 1080]\nwin = visual.Window(winsize, fullscr=True, allowGUI=False,screen = 1, color = \"#a6a6a6\", unit='pix')\n\n# visual stimuli\nCALISTIMS = glob.glob(\"CalibrationStim\\\\*.png\")\n\n# video\nVideoGrabber = visual.MovieStim(win, \"CalibrationStim\\\\Attentiongrabber.mp4\", loop=True, size=[800,450],volume =0.4, unit = 'pix')\n\n# sound\nSound = sound.Sound(directory + \"CalibrationStim\\\\audio.wav\")\n\n\n#%% Center face - screen\n\n# set video playing\nVideoGrabber.setAutoDraw(True)\nVideoGrabber.play()\n\n# show the relative position of the subject to the eyetracker\nEyeTracker.show_status()\n\n# stop the attention grabber\nVideoGrabber.setAutoDraw(False)\nVideoGrabber.stop()\n\n\n#%% Calibration\n\n# define calibration points\nCALINORMP = [(-0.4, 0.4), (-0.4, -0.4), (0.0, 0.0), (0.4, 0.4), (0.4, -0.4)]\nCALIPOINTS = [(x * winsize[0], y * winsize[1]) for x, y in CALINORMP]\n\nsuccess = controller.run_calibration(CALIPOINTS, CALISTIMS, audio = Sound, focus_time=2)\nwin.flip()"
   },
   {
-    "objectID": "Workshops/2026_Chieti/index.html",
-    "href": "Workshops/2026_Chieti/index.html",
+    "objectID": "index.html",
+    "href": "index.html",
     "title": "DevStart Workshops",
     "section": "",
-    "text": "A Practical Introduction\n      to Eye-tracking for\n      Developmental Science",
-    "crumbs": [
-      "Chieti's Workshop"
-    ]
+    "text": "On top of creating and maintaining DevStart we sometimes give workshops on the themes we cover. These workshops sometimes are part of larger events like conferences, bigger workshops, or summer schools, and sometimes we organize them on our own.  This website serves us as a small hub to provide the participants of each specific workshop with all the relevant information, materials, and resources as sometimes these are slightly different from one event to another."
   },
   {
-    "objectID": "Workshops/2026_Chieti/index.html#about-the-workshop",
-    "href": "Workshops/2026_Chieti/index.html#about-the-workshop",
+    "objectID": "index.html#our-workshops-past-and-future..",
+    "href": "index.html#our-workshops-past-and-future..",
     "title": "DevStart Workshops",
-    "section": "About the Workshop",
-    "text": "About the Workshop\nThis workshop, organized by Prof. Maria Spinelli, is led by the DevStart team and provides a practical introduction to eye-tracking methods in developmental science. Participants will learn the complete research pipeline—from designing developmental experimental paradigms, to collecting high-quality eye-tracking data and preprocessing it for analysis.\nThroughout the workshop, we’ll emphasize practical skills and best practices specific to developmental populations, including calibration techniques for young participants and handling common challenges when working with infants. All methods will be taught using open-source tools, primarily Python for experiment design and data collection.\nBy the end of the workshop, participants will have the foundational knowledge and practical experience needed to start their own eye-tracking research with developmental populations.\n\nView Full Program",
-    "crumbs": [
-      "Chieti's Workshop"
-    ]
+    "section": "Our workshops past and future..",
+    "text": "Our workshops past and future..\nWant to check what we are planning and working on?? here is a list of our workshops both future one and old one we did.\n\n  \n\n    \n      \n        3-4 April, 2025\n        Birkbeck Uni (London)\n      \n      \n        \n        \n      \n      \n        Eye-tracking Workshop for Developmental Scientist\n        Our first eye-tracking workshop designed to guide developmental researchers through the complete workflow, from collecting eye-tracking data with infants and children to preprocessing and analyzing gaze data\n      \n    \n\n    \n      \n        12-13 Jan, 2026\n        Chieti Uni\n      \n      \n        \n        \n      \n      \n        A Practical Introduction to Eye-tracking for Developmental Science\n        Practical workshop focused on designing and implementing developmental eye-tracking studies. Features the first introduction of the DeToX Python package for streamlined data collection with Tobii eye trackers\n      \n    \n\n    \n      \n        15-Jan-26\n        BCCD (Budapest)\n      \n      \n        \n        \n      \n      \n        Hands-on Generalized Mixed-Effects Models\n        Pre-BCCD 2026 conference workshop providing hands-on training in generalized mixed-effects models for analyzing developmental and longitudinal data\n      \n    \n\n    \n      \n        Summer 2026\n        Birkbeck Uni (London)\n      \n      \n        \n        \n      \n      \n        Eye-tracking Workshop for Developmental Scientist 2\n        Our second comprehensive eye-tracking workshop covering the complete research pipeline, from experimental design and data collection to preprocessing, analysis, and visualization of developmental eye-tracking data"
   },
   {
-    "objectID": "Workshops/2026_Chieti/index.html#pre-workshop-preparation",
-    "href": "Workshops/2026_Chieti/index.html#pre-workshop-preparation",
+    "objectID": "index.html#interested-in-hosting-a-workshop",
+    "href": "index.html#interested-in-hosting-a-workshop",
     "title": "DevStart Workshops",
-    "section": "Pre-Workshop Preparation",
-    "text": "Pre-Workshop Preparation\nTo ensure a smooth workshop experience, please install the required software and download necessary materials beforehand. All setup instructions and resources are available below:\n\nSoftware & Materials",
-    "crumbs": [
-      "Chieti's Workshop"
-    ]
-  },
-  {
-    "objectID": "Workshops/2026_Chieti/index.html#contact-us",
-    "href": "Workshops/2026_Chieti/index.html#contact-us",
-    "title": "DevStart Workshops",
-    "section": "Contact Us",
-    "text": "Contact Us\nIf you have any questions or need assistance with setup before the workshop, please contact us:\n\nTommaso Ghilardi: t.ghilardi@bbk.ac.uk\nFrancesco Poli: francesco.poli@mrc-cbu.cam.ac.uk\nGiulia Serino: g.serino@bbk.ac.uk",
-    "crumbs": [
-      "Chieti's Workshop"
-    ]
+    "section": "Interested in Hosting a Workshop?",
+    "text": "Interested in Hosting a Workshop?\nDon’t see a workshop that fits your needs? We’d love to collaborate with you! Whether you’re organizing a conference, summer school, or institutional training event, we can design a customized eye-tracking workshop tailored to your group’s specific interests and skill levels.\nGet in touch:\n\nTommaso Ghilardi: t.ghilardi@bbk.ac.uk\nFrancesco Poli: francesco.poli@mrc-cbu.cam.ac.uk\nGiulia Serino: g.serino@bbk.ac.uk"
   },
   {
     "objectID": "Workshops/2026_BCCD/index.html",
@@ -108,82 +147,43 @@
     ]
   },
   {
-    "objectID": "Workshops/2026_DevWorkEye/index.html",
-    "href": "Workshops/2026_DevWorkEye/index.html",
+    "objectID": "Workshops/2026_Chieti/index.html",
+    "href": "Workshops/2026_Chieti/index.html",
     "title": "DevStart Workshops",
     "section": "",
-    "text": "Eye-tracking Workshop\n      for\n      Developmental scientists"
-  },
-  {
-    "objectID": "Workshops/2026_DevWorkEye/index.html#details-are-coming-soon",
-    "href": "Workshops/2026_DevWorkEye/index.html#details-are-coming-soon",
-    "title": "DevStart Workshops",
-    "section": "DETAILS ARE COMING SOON…",
-    "text": "DETAILS ARE COMING SOON…"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "DevStart Workshops",
-    "section": "",
-    "text": "On top of creating and maintaining DevStart we sometimes give workshops on the themes we cover. These workshops sometimes are part of larger events like conferences, bigger workshops, or summer schools, and sometimes we organize them on our own.  This website serves us as a small hub to provide the participants of each specific workshop with all the relevant information, materials, and resources as sometimes these are slightly different from one event to another."
-  },
-  {
-    "objectID": "index.html#our-workshops-past-and-future..",
-    "href": "index.html#our-workshops-past-and-future..",
-    "title": "DevStart Workshops",
-    "section": "Our workshops past and future..",
-    "text": "Our workshops past and future..\nWant to check what we are planning and working on?? here is a list of our workshops both future one and old one we did.\n\n  \n\n    \n      \n        3-4 April, 2025\n        Birkbeck Uni (London)\n      \n      \n        \n        \n      \n      \n        Eye-tracking Workshop for Developmental Scientist\n        Our first eye-tracking workshop designed to guide developmental researchers through the complete workflow, from collecting eye-tracking data with infants and children to preprocessing and analyzing gaze data\n      \n    \n\n    \n      \n        12-13 Jan, 2026\n        Chieti Uni\n      \n      \n        \n        \n      \n      \n        A Practical Introduction to Eye-tracking for Developmental Science\n        Practical workshop focused on designing and implementing developmental eye-tracking studies. Features the first introduction of the DeToX Python package for streamlined data collection with Tobii eye trackers\n      \n    \n\n    \n      \n        15-Jan-26\n        BCCD (Budapest)\n      \n      \n        \n        \n      \n      \n        Hands-on Generalized Mixed-Effects Models\n        Pre-BCCD 2026 conference workshop providing hands-on training in generalized mixed-effects models for analyzing developmental and longitudinal data\n      \n    \n\n    \n      \n        Summer 2026\n        Birkbeck Uni (London)\n      \n      \n        \n        \n      \n      \n        Eye-tracking Workshop for Developmental Scientist 2\n        Our second comprehensive eye-tracking workshop covering the complete research pipeline, from experimental design and data collection to preprocessing, analysis, and visualization of developmental eye-tracking data"
-  },
-  {
-    "objectID": "index.html#interested-in-hosting-a-workshop",
-    "href": "index.html#interested-in-hosting-a-workshop",
-    "title": "DevStart Workshops",
-    "section": "Interested in Hosting a Workshop?",
-    "text": "Interested in Hosting a Workshop?\nDon’t see a workshop that fits your needs? We’d love to collaborate with you! Whether you’re organizing a conference, summer school, or institutional training event, we can design a customized eye-tracking workshop tailored to your group’s specific interests and skill levels.\nGet in touch:\n\nTommaso Ghilardi: t.ghilardi@bbk.ac.uk\nFrancesco Poli: francesco.poli@mrc-cbu.cam.ac.uk\nGiulia Serino: g.serino@bbk.ac.uk"
-  },
-  {
-    "objectID": "Workshops/2026_BCCD/MaterialNeeded.html",
-    "href": "Workshops/2026_BCCD/MaterialNeeded.html",
-    "title": "Material needed",
-    "section": "",
-    "text": "This workshop provides hands-on experience with generalized mixed effects models. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using R and Positron for conducting the analysis.\n\n\nInstalling R and Positron is straightforward. however if you do not have thme isntalled yet we suggest to follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. Simply click the buttons to see how to insta ll R and Rstudio on your operating system.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "text": "A Practical Introduction\n      to Eye-tracking for\n      Developmental Science",
     "crumbs": [
-      "DevStart",
-      "Needed Material"
+      "Chieti's Workshop"
     ]
   },
   {
-    "objectID": "Workshops/2026_BCCD/MaterialNeeded.html#pre-workshop-setup",
-    "href": "Workshops/2026_BCCD/MaterialNeeded.html#pre-workshop-setup",
-    "title": "Material needed",
-    "section": "",
-    "text": "This workshop provides hands-on experience with generalized mixed effects models. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using R and Positron for conducting the analysis.\n\n\nInstalling R and Positron is straightforward. however if you do not have thme isntalled yet we suggest to follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. Simply click the buttons to see how to insta ll R and Rstudio on your operating system.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "objectID": "Workshops/2026_Chieti/index.html#about-the-workshop",
+    "href": "Workshops/2026_Chieti/index.html#about-the-workshop",
+    "title": "DevStart Workshops",
+    "section": "About the Workshop",
+    "text": "About the Workshop\nThis workshop, organized by Prof. Maria Spinelli, is led by the DevStart team and provides a practical introduction to eye-tracking methods in developmental science. Participants will learn the complete research pipeline—from designing developmental experimental paradigms, to collecting high-quality eye-tracking data and preprocessing it for analysis.\nThroughout the workshop, we’ll emphasize practical skills and best practices specific to developmental populations, including calibration techniques for young participants and handling common challenges when working with infants. All methods will be taught using open-source tools, primarily Python for experiment design and data collection.\nBy the end of the workshop, participants will have the foundational knowledge and practical experience needed to start their own eye-tracking research with developmental populations.\n\nView Full Program",
     "crumbs": [
-      "DevStart",
-      "Needed Material"
+      "Chieti's Workshop"
     ]
   },
   {
-    "objectID": "Workshops/2026_Chieti/MaterialNeeded.html",
-    "href": "Workshops/2026_Chieti/MaterialNeeded.html",
-    "title": "Material needed",
-    "section": "",
-    "text": "This workshop provides hands-on experience with eye-tracking data collection and analysis. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using Python and PsychoPy for experiment creation and data collection.\n\n\nTo ensure you’re ready for the workshop, please follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. If you’re new to these tools, simply click the buttons to navigate to the most relevant sections based on your experience level and goals.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nInstallation Guide\n\n\n\nThe setup process typically takes 20-30 minutes, though some software can be complex to install. We’ve included alternative installation methods and solutions for common problems to ensure everything goes smoothly. If you encounter any issues, please email us at t.ghilardi@bbk.ac.uk before the workshop.\n\n\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "objectID": "Workshops/2026_Chieti/index.html#pre-workshop-preparation",
+    "href": "Workshops/2026_Chieti/index.html#pre-workshop-preparation",
+    "title": "DevStart Workshops",
+    "section": "Pre-Workshop Preparation",
+    "text": "Pre-Workshop Preparation\nTo ensure a smooth workshop experience, please install the required software and download necessary materials beforehand. All setup instructions and resources are available below:\n\nSoftware & Materials",
     "crumbs": [
-      "DevStart",
-      "Needed Material"
+      "Chieti's Workshop"
     ]
   },
   {
-    "objectID": "Workshops/2026_Chieti/MaterialNeeded.html#pre-workshop-setup",
-    "href": "Workshops/2026_Chieti/MaterialNeeded.html#pre-workshop-setup",
-    "title": "Material needed",
-    "section": "",
-    "text": "This workshop provides hands-on experience with eye-tracking data collection and analysis. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using Python and PsychoPy for experiment creation and data collection.\n\n\nTo ensure you’re ready for the workshop, please follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. If you’re new to these tools, simply click the buttons to navigate to the most relevant sections based on your experience level and goals.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nInstallation Guide\n\n\n\nThe setup process typically takes 20-30 minutes, though some software can be complex to install. We’ve included alternative installation methods and solutions for common problems to ensure everything goes smoothly. If you encounter any issues, please email us at t.ghilardi@bbk.ac.uk before the workshop.\n\n\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "objectID": "Workshops/2026_Chieti/index.html#contact-us",
+    "href": "Workshops/2026_Chieti/index.html#contact-us",
+    "title": "DevStart Workshops",
+    "section": "Contact Us",
+    "text": "Contact Us\nIf you have any questions or need assistance with setup before the workshop, please contact us:\n\nTommaso Ghilardi: t.ghilardi@bbk.ac.uk\nFrancesco Poli: francesco.poli@mrc-cbu.cam.ac.uk\nGiulia Serino: g.serino@bbk.ac.uk",
     "crumbs": [
-      "DevStart",
-      "Needed Material"
+      "Chieti's Workshop"
     ]
   },
   {
