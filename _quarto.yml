@@ -34,7 +34,7 @@ website:
     logo: resources/LOGO_workshop.png
 
     right:
-      - href: https://tommasoghilardi.github.io/DevStart/
+      - href: https://devstart.org/
         text: DevStart
 
       - text: "Current Workshops"
