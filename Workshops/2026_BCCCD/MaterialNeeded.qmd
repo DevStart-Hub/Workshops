@@ -1,6 +1,6 @@
 ---
 title: "Material needed"
-subtitle: "for BCCD 2026"
+subtitle: "for BCCCD 2026"
 format: html
 ---
 

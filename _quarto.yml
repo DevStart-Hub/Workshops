@@ -41,8 +41,8 @@ website:
         menu:
           - href: Workshops/2026_Chieti/index.qmd
             text: "Chieti University 2026"
-          - href: Workshops/2026_BCCD/index.qmd
-            text: "BCCD 2026"
+          - href: Workshops/2026_BCCCD/index.qmd
+            text: "BCCCD 2026"
           - href: Workshops/2026_DevWorkEye/index.qmd
             text: "Developmental Eye-tracking workshop 2026"
 
@@ -68,10 +68,10 @@ website:
 
     - id: sidebar-bccd2026
       contents:
-        - href: Workshops/2026_BCCD/index.qmd
+        - href: Workshops/2026_BCCCD/index.qmd
           text: "Chieti's Workshop"
           icon: house-fill
-        - href: Workshops/2026_BCCD/MaterialNeeded.qmd
+        - href: Workshops/2026_BCCCD/MaterialNeeded.qmd
           text: "Needed Material"
           icon: laptop
 

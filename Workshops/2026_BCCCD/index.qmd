@@ -26,13 +26,13 @@ keywords: "devstart, workshop, eye-tracking, developmental-science, open-source-
 <div class="badge-container">
   <span class="badge rounded-pill bg-light big-badge">
     <span class="big-text">15 January 2026</span><br>
-    <span class="small-text">BCCD 2026 Conference</span>
+    <span class="small-text">BCCCD 2026 Conference</span>
   </span>
 </div>
 ```
 ## About the Workshop
 
-This workshop is part of the BCCD 2026 conference pre-conference events and provides a hands-on introduction to Generalized Mixed-Effects Models (GLMMs) in R for developmental and comparative research.
+This workshop is part of the BCCCD 2026 conference pre-conference events and provides a hands-on introduction to Generalized Mixed-Effects Models (GLMMs) in R for developmental and comparative research.
 
 Developmental data are often messy: participants respond differently to stimuli, fatigue over trials, and outcomes are frequently non-normal (right-skewed reaction times, binary choices, count data). This workshop teaches you to build statistical models that match your data's complexity—from simple linear models to GLMMs with appropriate distributions and random effects structures.
 
