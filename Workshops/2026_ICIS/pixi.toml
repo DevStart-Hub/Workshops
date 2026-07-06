@@ -1,0 +1,15 @@
+[workspace]
+channels = ["conda-forge"]
+name = "ICIS2026_workshop"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "==3.12"
+
+[pypi-dependencies]
+opencv-python = ">=5.0.0.93, <6"
+pandas = ">=3.0.3, <4"
+mediapipe = ">=0.10.35, <0.11"
