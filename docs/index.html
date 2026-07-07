@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,6 +11,9 @@
 
 <title>DevStart Workshops</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -40,10 +43,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-710ea84994903bc41163d01235b9627e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-f1a5c2bb43452cd3d80060817c0f5863.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-ba35e5b3b27a7629e37cc41c0221bb9e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-eec75065ec6cbc10b11afe804f73e6e1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,7 +105,8 @@ cookieconsent.run({
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./resources/LOGO_workshop.png" alt="" class="navbar-logo">
+    <img src="./resources/LOGO_workshop.png" alt="" class="navbar-logo light-content">
+    <img src="./resources/LOGO_workshop.png" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">DevStart Workshops</span>
@@ -211,7 +215,7 @@ Statistical Analysis
 <div class="timeline-wrapper">
   <div class="timeline-container">
 
-    <div class="timeline-item past">
+    <div class="timeline-item past" id="timeline-event-1">
       <div class="timeline-date-container">
         <div class="timeline-date">3-4 April, 2025</div>
         <div class="timeline-location">Birkbeck Uni (London)</div>
@@ -226,7 +230,7 @@ Statistical Analysis
       </div>
     </div>
 
-    <div class="timeline-item" id="current-event">
+    <div class="timeline-item past" id="timeline-event-2">
       <div class="timeline-date-container">
         <div class="timeline-date">12-13 Jan, 2026</div>
         <div class="timeline-location">Chieti Uni</div>
@@ -241,9 +245,9 @@ Statistical Analysis
       </a>
     </div>
 
-    <div class="timeline-item" id="current-event">
+    <div class="timeline-item past" id="timeline-event-3">
       <div class="timeline-date-container">
-        <div class="timeline-date">15-Jan-26</div>
+        <div class="timeline-date">01-15-26</div>
         <div class="timeline-location">BCCCD (Budapest)</div>
       </div>
       <div class="timeline-center">
@@ -256,24 +260,38 @@ Statistical Analysis
       </a>
     </div>
 
-    <div class="timeline-item" id="current-event">
+    <div class="timeline-item" id="timeline-event-4">
       <div class="timeline-date-container">
-        <div class="timeline-date">Summer 2026</div>
-        <div class="timeline-location">Birkbeck Uni (London)</div>
+        <div class="timeline-date">07-06-26</div>
+        <div class="timeline-location">ICIS (Panama)</div>
       </div>
       <div class="timeline-center">
         <div class="timeline-line"></div>
         <div class="timeline-icon"></div>
       </div>
-      <a href="https://devstart.org/Workshops/Workshops/2026_DevWorkEye/Index.html" class="timeline-content">
-        <h3 class="anchored">Eye-tracking Workshop for Developmental Scientist 2</h3>
-        <p>Our second comprehensive eye-tracking workshop covering the complete research pipeline, from experimental design and data collection to preprocessing, analysis, and visualization of developmental eye-tracking data</p>
+      <a href="https://infantstudies.org/pre-congress-workshops/" class="timeline-content">
+        <h3 class="anchored">From Screen to Scene: Shared Principles in Screen-Based and Head-Mounted Eye-Tracking</h3>
+        <p>Half-day workshop comparing screen-based and head-mounted eye-tracking in infant research, focusing on shared analytical principles, system choice, AOIs, time windows, preprocessing strategies, and practical examples using real datasets and analysis scripts.</p>
       </a>
     </div>
 
   </div>
 </div>
 
+<script>
+  (() => {
+    const scrollTimelineToLatest = () => {
+      const timeline = document.querySelector('.timeline-wrapper');
+      if (!timeline) return;
+      timeline.scrollTop = timeline.scrollHeight;
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      requestAnimationFrame(scrollTimelineToLatest);
+    });
+    window.addEventListener('load', scrollTimelineToLatest);
+  })();
+</script>
 </section>
 <section id="interested-in-hosting-a-workshop" class="level2">
 <h2 class="anchored" data-anchor-id="interested-in-hosting-a-workshop">Interested in Hosting a Workshop?</h2>
@@ -340,13 +358,14 @@ Statistical Analysis
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

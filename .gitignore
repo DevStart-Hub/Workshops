@@ -7,3 +7,6 @@
 
 .vscode
 /.luarc.json
+
+**/*.quarto_ipynb
+/_freeze/

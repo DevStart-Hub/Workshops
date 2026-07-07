@@ -1,93 +1,24 @@
 [
   {
-    "objectID": "Workshops/2024_BTG/index.html",
-    "href": "Workshops/2024_BTG/index.html",
-    "title": "BTG 2024",
-    "section": "",
-    "text": "Hello hello!!! This page has been created to provide support and resources for the tutorial that will take place during the Bridging the Technological Gap Workshop."
-  },
-  {
-    "objectID": "Workshops/2024_BTG/index.html#python",
-    "href": "Workshops/2024_BTG/index.html#python",
-    "title": "BTG 2024",
-    "section": "Python",
-    "text": "Python\nIn this tutorial, our primary tool will be Python!! There are lots of ways to install python. We recommend installing it via Miniconda. However, for this workshop, the suggested way to install Python is using Anaconda.\nYou might ask….Then which installation should I follow? Well, it doesn’t really matter! Miniconda is a minimal installation of Anaconda. It lacks the GUI, but has all the main features. So follow whichever one you like more!\nOnce you have it installed, we need a few more things. For the Gaze Tracking & Pupillometry Workshop (the part we will be hosting) we will need some specific libraries and files. We have tried our best to make everything as simple as possible:\n\nLibraries\nWe will be working with a conda environment (a self-contained directory that contains a specific collection of Python packages and dependencies, allowing you to manage different project requirements separately). To create this environment and install all the necessary libraries, all you need is this file:\nOnce you have downloaded the file, simply open the anaconda/miniconda terminal and type conda env create -f, then simply drag and drop the downloaded file onto the terminal. This will copy the filename with its absolute path. In my case it looked something like this:\n\n\n\n\n\nNow you will be asked to confirm a few things (by pressing Y) and after a while of downloading and installing you will have your new workshop environment called Psychopy!\nNow you should see a shortcut in your start menu called Spyder(psychopy), just click on it to open spyder in our newly created environment. If you don’t see it, just reopen the anaconda/miniconda terminal, activate your new environment by typing conda activate psychopy and then just type spyder.\n\n\nFiles\nWe also need some files if you want to run the examples with us. Here you can download the zip files with everything you need:\nOnce downloaded, simply extract the file by unzipping it. For our workshop we will work together in a folder that should look like this:\n\n\n\n\n\nIf you have a similar folder… you are ready to go!!!!"
-  },
-  {
-    "objectID": "Workshops/2024_BTG/index.html#videos",
-    "href": "Workshops/2024_BTG/index.html#videos",
-    "title": "BTG 2024",
-    "section": "Videos",
-    "text": "Videos\nWe received several questions about working with videos and PsychoPy while doing eye-tracking. It can be quite tricky, but here are some tips:\n\nMake sure you’re using the right codec.\nIf you need to change the codec of the video, you can re-encode it using a tool like\nHandbrake (remember to set the constant framerate in the video option)\n\nBelow, you’ll find a code example that adapts our Create an eye-tracking experiment tutorial to work with a video file. The main differences are:\n\nWe’re showing a video after the fixation.\nWe’re saving triggers to our eye-tracking data and also saving the frame index at each sample (as a continuous number column).\n\nimport os\nimport glob\nimport pandas as pd\nimport numpy as np\n\n# Import some libraries from PsychoPy\nfrom psychopy import core, event, visual, prefs\nprefs.hardware['audioLib'] = ['PTB']\nfrom psychopy import sound\n\nimport tobii_research as tr\n\n\n#%% Functions\n\n# This will be called every time there is new gaze data\ndef gaze_data_callback(gaze_data):\n    global trigger\n    global gaze_data_buffer\n    global winsize\n    global frame_indx\n\n    # Extract the data we are interested in\n    t  = gaze_data.system_time_stamp / 1000.0\n    lx = gaze_data.left_eye.gaze_point.position_on_display_area[0] * winsize[0]\n    ly = winsize[1] - gaze_data.left_eye.gaze_point.position_on_display_area[1] * winsize[1]\n    lp = gaze_data.left_eye.pupil.diameter\n    lv = gaze_data.left_eye.gaze_point.validity\n    rx = gaze_data.right_eye.gaze_point.position_on_display_area[0] * winsize[0]\n    ry = winsize[1] - gaze_data.right_eye.gaze_point.position_on_display_area[1] * winsize[1]\n    rp = gaze_data.right_eye.pupil.diameter\n    rv = gaze_data.right_eye.gaze_point.validity\n\n    # Add gaze data to the buffer\n    gaze_data_buffer.append((t,lx,ly,lp,lv,rx,ry,rp,rv,trigger, frame_indx))\n    trigger = ''\n\ndef write_buffer_to_file(buffer, output_path):\n\n    # Make a copy of the buffer and clear it\n    buffer_copy = buffer[:]\n    buffer.clear()\n\n    # Define column names\n    columns = ['time', 'L_X', 'L_Y', 'L_P', 'L_V',\n               'R_X', 'R_Y', 'R_P', 'R_V', 'Event', 'FrameIndex']\n\n    # Convert buffer to DataFrame\n    out = pd.DataFrame(buffer_copy, columns=columns)\n\n    # Check if the file exists\n    file_exists = not os.path.isfile(output_path)\n\n    # Write the DataFrame to an HDF5 file\n    out.to_csv(output_path, mode='a', index =False, header = file_exists)\n\n\n\n#%% Load and prepare stimuli\n\nos.chdir(r'C:\\Users\\tomma\\Desktop\\EyeTracking\\Files')\n\n# Winsize\nwinsize = (960, 540)\n\n# create a window\nwin = visual.Window(size = winsize,fullscr=False, units=\"pix\", screen=0)\n\n\n# Load images and video\nfixation = visual.ImageStim(win, image='EXP\\\\Stimuli\\\\fixation.png', size = (200, 200))\nVideo = visual.MovieStim(win, filename='EXP\\\\Stimuli\\\\Video60.mp4',  loop=False, size=[600,380],volume =0.4, autoStart=True)\n\n\n# Define the trigger and frame index variable to pass to the gaze_data_callback\ntrigger = ''\nframe_indx = np.nan\n\n\n\n#%% Record the data\n\n# Find all connected eye trackers\nfound_eyetrackers = tr.find_all_eyetrackers()\n\n# We will just use the first one\nEyetracker = found_eyetrackers[0]\n\n#Start recording\nEyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)\n\n# Crate empty list to append data\ngaze_data_buffer = []\n\nTrials_number = 10\nfor trial in range(Trials_number):\n\n    ### Present the fixation\n    win.flip() # we flip to clean the window\n\n\n    fixation.draw()\n    win.flip()\n    trigger = 'Fixation'\n    core.wait(1)  # wait for 1 second\n\n    Video.play()\n    trigger = 'Video'\n    while not Video.isFinished:\n\n        # Draw the video frame\n        Video.draw()\n\n        # Flip the window and add index to teh frame_indx\n        win.flip()\n\n        # add which frame was just shown to the eyetracking data\n        frame_indx = Video.frameIndex\n\n    Video.stop()\n    win.flip()\n\n\n    ### ISI\n    win.flip()    # we re-flip at the end to clean the window\n    clock = core.Clock()\n    write_buffer_to_file(gaze_data_buffer, 'DATA\\\\RAW\\\\Test.csv')\n    while clock.getTime() &lt; 1:\n        pass\n\n    ### Check for closing experiment\n    keys = event.getKeys() # collect list of pressed keys\n    if 'escape' in keys:\n        win.close()  # close window\n        Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback) # unsubscribe eyetracking\n        core.quit()  # stop study\n\nwin.close() # close window\nEyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback) # unsubscribe eyetracking\ncore.quit() # stop study"
-  },
-  {
-    "objectID": "Workshops/2024_BTG/index.html#calibration",
-    "href": "Workshops/2024_BTG/index.html#calibration",
-    "title": "BTG 2024",
-    "section": "Calibration",
-    "text": "Calibration\nWe received a question about the calibration. How to change the focus time that the eye-tracking uses to record samples for each calibration point. Luckily, the function from the Psychopy_tobii_infant repository allows for an additional argument that specifies how long we want the focus time (default = 0.5s). Thus, you can simply change it by running it with a different value.\nHere below we changed the example of Calibrating eye-tracking by increasing the focus_time to 2s. You can increase or decrease it based on your needs!!\nimport os\nfrom psychopy import visual, sound\n\n# import Psychopy tobii infant\nos.chdir(r\"C:\\Users\\tomma\\Desktop\\EyeTracking\\Files\\Calibration\")\nfrom psychopy_tobii_infant import TobiiInfantController\n\n\n#%% window and stimuli\nwinsize = [1920, 1080]\nwin = visual.Window(winsize, fullscr=True, allowGUI=False,screen = 1, color = \"#a6a6a6\", unit='pix')\n\n# visual stimuli\nCALISTIMS = glob.glob(\"CalibrationStim\\\\*.png\")\n\n# video\nVideoGrabber = visual.MovieStim(win, \"CalibrationStim\\\\Attentiongrabber.mp4\", loop=True, size=[800,450],volume =0.4, unit = 'pix')\n\n# sound\nSound = sound.Sound(directory + \"CalibrationStim\\\\audio.wav\")\n\n\n#%% Center face - screen\n\n# set video playing\nVideoGrabber.setAutoDraw(True)\nVideoGrabber.play()\n\n# show the relative position of the subject to the eyetracker\nEyeTracker.show_status()\n\n# stop the attention grabber\nVideoGrabber.setAutoDraw(False)\nVideoGrabber.stop()\n\n\n#%% Calibration\n\n# define calibration points\nCALINORMP = [(-0.4, 0.4), (-0.4, -0.4), (0.0, 0.0), (0.4, 0.4), (0.4, -0.4)]\nCALIPOINTS = [(x * winsize[0], y * winsize[1]) for x, y in CALINORMP]\n\nsuccess = controller.run_calibration(CALIPOINTS, CALISTIMS, audio = Sound, focus_time=2)\nwin.flip()"
-  },
-  {
-    "objectID": "Workshops/2026_BCCCD/MaterialNeeded.html",
-    "href": "Workshops/2026_BCCCD/MaterialNeeded.html",
-    "title": "Material needed",
-    "section": "",
-    "text": "This workshop provides hands-on experience with generalized mixed effects models. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using R and Positron for conducting the analysis.\n\n\nInstalling R and Positron is straightforward. however if you do not have thme isntalled yet we suggest to follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. Simply click the buttons to see how to insta ll R and Rstudio on your operating system.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
-    "crumbs": [
-      "DevStart",
-      "Needed Material"
-    ]
-  },
-  {
-    "objectID": "Workshops/2026_BCCCD/MaterialNeeded.html#pre-workshop-setup",
-    "href": "Workshops/2026_BCCCD/MaterialNeeded.html#pre-workshop-setup",
-    "title": "Material needed",
-    "section": "",
-    "text": "This workshop provides hands-on experience with generalized mixed effects models. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using R and Positron for conducting the analysis.\n\n\nInstalling R and Positron is straightforward. however if you do not have thme isntalled yet we suggest to follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. Simply click the buttons to see how to insta ll R and Rstudio on your operating system.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
-    "crumbs": [
-      "DevStart",
-      "Needed Material"
-    ]
-  },
-  {
-    "objectID": "Workshops/2026_Chieti/index.html",
-    "href": "Workshops/2026_Chieti/index.html",
+    "objectID": "index.html",
+    "href": "index.html",
     "title": "DevStart Workshops",
     "section": "",
-    "text": "A Practical Introduction\n      to Eye-tracking for\n      Developmental Science",
-    "crumbs": [
-      "Chieti's Workshop"
-    ]
+    "text": "DevStart Workshops offer hands-on training in eye-tracking methodology, statistical analysis, and programming for cognitive scientists. The topics of our workshops are always covered on DevStart too. We run them both independently and as part of larger events (e.g., conferences, summer schools, or workshop series).  This website serves us as a hub to provide the participants of each specific workshop with all the relevant information, materials, and resources."
   },
   {
-    "objectID": "Workshops/2026_Chieti/index.html#about-the-workshop",
-    "href": "Workshops/2026_Chieti/index.html#about-the-workshop",
+    "objectID": "index.html#our-workshops-past-and-future",
+    "href": "index.html#our-workshops-past-and-future",
     "title": "DevStart Workshops",
-    "section": "About the Workshop",
-    "text": "About the Workshop\nThis workshop, organized by Prof. Maria Spinelli, is led by the DevStart team and provides a practical introduction to eye-tracking methods in developmental science. Participants will learn the complete research pipeline—from designing developmental experimental paradigms, to collecting high-quality eye-tracking data and preprocessing it for analysis.\nThroughout the workshop, we’ll emphasize practical skills and best practices specific to developmental populations, including calibration techniques for young participants and handling common challenges when working with infants. All methods will be taught using open-source tools, primarily Python for experiment design and data collection.\nBy the end of the workshop, participants will have the foundational knowledge and practical experience needed to start their own eye-tracking research with developmental populations.\n\nView Full Program",
-    "crumbs": [
-      "Chieti's Workshop"
-    ]
+    "section": "Our workshops, past and future",
+    "text": "Our workshops, past and future\nIf you’re interested in our past events or you don’t want to miss our next ones, here’s a full list of our workshops:\n\n  \n\n    \n      \n        3-4 April, 2025\n        Birkbeck Uni (London)\n      \n      \n        \n        \n      \n      \n        Eye-tracking Workshop for Developmental Scientist\n        Our first eye-tracking workshop designed to guide developmental researchers through the complete workflow, from collecting eye-tracking data with infants and children to preprocessing and analyzing gaze data\n      \n    \n\n    \n      \n        12-13 Jan, 2026\n        Chieti Uni\n      \n      \n        \n        \n      \n      \n        A Practical Introduction to Eye-tracking for Developmental Science\n        Practical workshop focused on designing and implementing developmental eye-tracking studies. Features the first introduction of the DeToX Python package for streamlined data collection with Tobii eye trackers\n      \n    \n\n    \n      \n        01-15-26\n        BCCCD (Budapest)\n      \n      \n        \n        \n      \n      \n        Hands-on Generalized Mixed-Effects Models\n        Pre-BCCCD 2026 conference workshop providing hands-on training in generalized mixed-effects models for analyzing developmental and longitudinal data\n      \n    \n\n    \n      \n        07-06-26\n        ICIS (Panama)\n      \n      \n        \n        \n      \n      \n        From Screen to Scene: Shared Principles in Screen-Based and Head-Mounted Eye-Tracking\n        Half-day workshop comparing screen-based and head-mounted eye-tracking in infant research, focusing on shared analytical principles, system choice, AOIs, time windows, preprocessing strategies, and practical examples using real datasets and analysis scripts."
   },
   {
-    "objectID": "Workshops/2026_Chieti/index.html#pre-workshop-preparation",
-    "href": "Workshops/2026_Chieti/index.html#pre-workshop-preparation",
+    "objectID": "index.html#interested-in-hosting-a-workshop",
+    "href": "index.html#interested-in-hosting-a-workshop",
     "title": "DevStart Workshops",
-    "section": "Pre-Workshop Preparation",
-    "text": "Pre-Workshop Preparation\nTo ensure a smooth workshop experience, please install the required software and download necessary materials beforehand. All setup instructions and resources are available below:\n\nSoftware & Materials",
-    "crumbs": [
-      "Chieti's Workshop"
-    ]
-  },
-  {
-    "objectID": "Workshops/2026_Chieti/index.html#contact-us",
-    "href": "Workshops/2026_Chieti/index.html#contact-us",
-    "title": "DevStart Workshops",
-    "section": "Contact Us",
-    "text": "Contact Us\nIf you have any questions or need assistance with setup before the workshop, please contact us:\n\nTommaso Ghilardi: t.ghilardi@bbk.ac.uk\nFrancesco Poli: francesco.poli@mrc-cbu.cam.ac.uk\nGiulia Serino: g.serino@bbk.ac.uk",
-    "crumbs": [
-      "Chieti's Workshop"
-    ]
+    "section": "Interested in Hosting a Workshop?",
+    "text": "Interested in Hosting a Workshop?\nDon’t see a workshop that fits your needs? We’d love to collaborate with you! Whether you’re organizing a conference, summer school, or institutional training event, we can design a customized workshop tailored to your group’s specific interests and skill levels.\nGet in touch:\n\nTommaso Ghilardi: t.ghilardi@bbk.ac.uk\nFrancesco Poli: francesco.poli@mrc-cbu.cam.ac.uk\nGiulia Serino: g.serino@bbk.ac.uk"
   },
   {
     "objectID": "Workshops/2026_DevWorkEye/index.html",
@@ -102,49 +33,6 @@
     "title": "DevStart Workshops",
     "section": "DETAILS ARE COMING SOON…",
     "text": "DETAILS ARE COMING SOON…"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "DevStart Workshops",
-    "section": "",
-    "text": "DevStart Workshops offer hands-on training in eye-tracking methodology, statistical analysis, and programming for cognitive scientists. The topics of our workshops are always covered on DevStart too. We run them both independently and as part of larger events (e.g., conferences, summer schools, or workshop series).  This website serves us as a hub to provide the participants of each specific workshop with all the relevant information, materials, and resources."
-  },
-  {
-    "objectID": "index.html#our-workshops-past-and-future",
-    "href": "index.html#our-workshops-past-and-future",
-    "title": "DevStart Workshops",
-    "section": "Our workshops, past and future",
-    "text": "Our workshops, past and future\nIf you’re interested in our past events or you don’t want to miss our next ones, here’s a full list of our workshops:\n\n  \n\n    \n      \n        3-4 April, 2025\n        Birkbeck Uni (London)\n      \n      \n        \n        \n      \n      \n        Eye-tracking Workshop for Developmental Scientist\n        Our first eye-tracking workshop designed to guide developmental researchers through the complete workflow, from collecting eye-tracking data with infants and children to preprocessing and analyzing gaze data\n      \n    \n\n    \n      \n        12-13 Jan, 2026\n        Chieti Uni\n      \n      \n        \n        \n      \n      \n        A Practical Introduction to Eye-tracking for Developmental Science\n        Practical workshop focused on designing and implementing developmental eye-tracking studies. Features the first introduction of the DeToX Python package for streamlined data collection with Tobii eye trackers\n      \n    \n\n    \n      \n        15-Jan-26\n        BCCCD (Budapest)\n      \n      \n        \n        \n      \n      \n        Hands-on Generalized Mixed-Effects Models\n        Pre-BCCCD 2026 conference workshop providing hands-on training in generalized mixed-effects models for analyzing developmental and longitudinal data\n      \n    \n\n    \n      \n        Summer 2026\n        Birkbeck Uni (London)\n      \n      \n        \n        \n      \n      \n        Eye-tracking Workshop for Developmental Scientist 2\n        Our second comprehensive eye-tracking workshop covering the complete research pipeline, from experimental design and data collection to preprocessing, analysis, and visualization of developmental eye-tracking data"
-  },
-  {
-    "objectID": "index.html#interested-in-hosting-a-workshop",
-    "href": "index.html#interested-in-hosting-a-workshop",
-    "title": "DevStart Workshops",
-    "section": "Interested in Hosting a Workshop?",
-    "text": "Interested in Hosting a Workshop?\nDon’t see a workshop that fits your needs? We’d love to collaborate with you! Whether you’re organizing a conference, summer school, or institutional training event, we can design a customized workshop tailored to your group’s specific interests and skill levels.\nGet in touch:\n\nTommaso Ghilardi: t.ghilardi@bbk.ac.uk\nFrancesco Poli: francesco.poli@mrc-cbu.cam.ac.uk\nGiulia Serino: g.serino@bbk.ac.uk"
-  },
-  {
-    "objectID": "Workshops/2026_Chieti/MaterialNeeded.html",
-    "href": "Workshops/2026_Chieti/MaterialNeeded.html",
-    "title": "Material needed",
-    "section": "",
-    "text": "This workshop provides hands-on experience with eye-tracking data collection and analysis. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using Python and PsychoPy for experiment creation and data collection.\n\n\nTo ensure you’re ready for the workshop, please follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. If you’re new to these tools, simply click the buttons to navigate to the most relevant sections based on your experience level and goals.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nInstallation Guide\n\n\n\nThe setup process typically takes 20-30 minutes, though some software can be complex to install. We’ve included alternative installation methods and solutions for common problems to ensure everything goes smoothly.\nPlease do not worry if something goes wrong, as these installations can sometimes be complicated. We will try to help you troubleshoot on the day of the workshop! If you encounter any major issues please email us at t.ghilardi@bbk.ac.uk.\n\n\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
-    "crumbs": [
-      "DevStart",
-      "Needed Material"
-    ]
-  },
-  {
-    "objectID": "Workshops/2026_Chieti/MaterialNeeded.html#pre-workshop-setup",
-    "href": "Workshops/2026_Chieti/MaterialNeeded.html#pre-workshop-setup",
-    "title": "Material needed",
-    "section": "",
-    "text": "This workshop provides hands-on experience with eye-tracking data collection and analysis. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using Python and PsychoPy for experiment creation and data collection.\n\n\nTo ensure you’re ready for the workshop, please follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. If you’re new to these tools, simply click the buttons to navigate to the most relevant sections based on your experience level and goals.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nInstallation Guide\n\n\n\nThe setup process typically takes 20-30 minutes, though some software can be complex to install. We’ve included alternative installation methods and solutions for common problems to ensure everything goes smoothly.\nPlease do not worry if something goes wrong, as these installations can sometimes be complicated. We will try to help you troubleshoot on the day of the workshop! If you encounter any major issues please email us at t.ghilardi@bbk.ac.uk.\n\n\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
-    "crumbs": [
-      "DevStart",
-      "Needed Material"
-    ]
   },
   {
     "objectID": "Workshops/2026_Chieti/Program.html",
@@ -207,5 +95,159 @@
     "crumbs": [
       "Chieti's Workshop"
     ]
+  },
+  {
+    "objectID": "Workshops/2024_BTG/index.html",
+    "href": "Workshops/2024_BTG/index.html",
+    "title": "BTG 2024",
+    "section": "",
+    "text": "Hello hello!!! This page has been created to provide support and resources for the tutorial that will take place during the Bridging the Technological Gap Workshop."
+  },
+  {
+    "objectID": "Workshops/2024_BTG/index.html#python",
+    "href": "Workshops/2024_BTG/index.html#python",
+    "title": "BTG 2024",
+    "section": "Python",
+    "text": "Python\nIn this tutorial, our primary tool will be Python!! There are lots of ways to install python. We recommend installing it via Miniconda. However, for this workshop, the suggested way to install Python is using Anaconda.\nYou might ask….Then which installation should I follow? Well, it doesn’t really matter! Miniconda is a minimal installation of Anaconda. It lacks the GUI, but has all the main features. So follow whichever one you like more!\nOnce you have it installed, we need a few more things. For the Gaze Tracking & Pupillometry Workshop (the part we will be hosting) we will need some specific libraries and files. We have tried our best to make everything as simple as possible:\n\nLibraries\nWe will be working with a conda environment (a self-contained directory that contains a specific collection of Python packages and dependencies, allowing you to manage different project requirements separately). To create this environment and install all the necessary libraries, all you need is this file:\nOnce you have downloaded the file, simply open the anaconda/miniconda terminal and type conda env create -f, then simply drag and drop the downloaded file onto the terminal. This will copy the filename with its absolute path. In my case it looked something like this:\n\n\n\n\n\nNow you will be asked to confirm a few things (by pressing Y) and after a while of downloading and installing you will have your new workshop environment called Psychopy!\nNow you should see a shortcut in your start menu called Spyder(psychopy), just click on it to open spyder in our newly created environment. If you don’t see it, just reopen the anaconda/miniconda terminal, activate your new environment by typing conda activate psychopy and then just type spyder.\n\n\nFiles\nWe also need some files if you want to run the examples with us. Here you can download the zip files with everything you need:\nOnce downloaded, simply extract the file by unzipping it. For our workshop we will work together in a folder that should look like this:\n\n\n\n\n\nIf you have a similar folder… you are ready to go!!!!"
+  },
+  {
+    "objectID": "Workshops/2024_BTG/index.html#videos",
+    "href": "Workshops/2024_BTG/index.html#videos",
+    "title": "BTG 2024",
+    "section": "Videos",
+    "text": "Videos\nWe received several questions about working with videos and PsychoPy while doing eye-tracking. It can be quite tricky, but here are some tips:\n\nMake sure you’re using the right codec.\nIf you need to change the codec of the video, you can re-encode it using a tool like\nHandbrake (remember to set the constant framerate in the video option)\n\nBelow, you’ll find a code example that adapts our Create an eye-tracking experiment tutorial to work with a video file. The main differences are:\n\nWe’re showing a video after the fixation.\nWe’re saving triggers to our eye-tracking data and also saving the frame index at each sample (as a continuous number column).\n\nimport os\nimport glob\nimport pandas as pd\nimport numpy as np\n\n# Import some libraries from PsychoPy\nfrom psychopy import core, event, visual, prefs\nprefs.hardware['audioLib'] = ['PTB']\nfrom psychopy import sound\n\nimport tobii_research as tr\n\n\n#%% Functions\n\n# This will be called every time there is new gaze data\ndef gaze_data_callback(gaze_data):\n    global trigger\n    global gaze_data_buffer\n    global winsize\n    global frame_indx\n\n    # Extract the data we are interested in\n    t  = gaze_data.system_time_stamp / 1000.0\n    lx = gaze_data.left_eye.gaze_point.position_on_display_area[0] * winsize[0]\n    ly = winsize[1] - gaze_data.left_eye.gaze_point.position_on_display_area[1] * winsize[1]\n    lp = gaze_data.left_eye.pupil.diameter\n    lv = gaze_data.left_eye.gaze_point.validity\n    rx = gaze_data.right_eye.gaze_point.position_on_display_area[0] * winsize[0]\n    ry = winsize[1] - gaze_data.right_eye.gaze_point.position_on_display_area[1] * winsize[1]\n    rp = gaze_data.right_eye.pupil.diameter\n    rv = gaze_data.right_eye.gaze_point.validity\n\n    # Add gaze data to the buffer\n    gaze_data_buffer.append((t,lx,ly,lp,lv,rx,ry,rp,rv,trigger, frame_indx))\n    trigger = ''\n\ndef write_buffer_to_file(buffer, output_path):\n\n    # Make a copy of the buffer and clear it\n    buffer_copy = buffer[:]\n    buffer.clear()\n\n    # Define column names\n    columns = ['time', 'L_X', 'L_Y', 'L_P', 'L_V',\n               'R_X', 'R_Y', 'R_P', 'R_V', 'Event', 'FrameIndex']\n\n    # Convert buffer to DataFrame\n    out = pd.DataFrame(buffer_copy, columns=columns)\n\n    # Check if the file exists\n    file_exists = not os.path.isfile(output_path)\n\n    # Write the DataFrame to an HDF5 file\n    out.to_csv(output_path, mode='a', index =False, header = file_exists)\n\n\n\n#%% Load and prepare stimuli\n\nos.chdir(r'C:\\Users\\tomma\\Desktop\\EyeTracking\\Files')\n\n# Winsize\nwinsize = (960, 540)\n\n# create a window\nwin = visual.Window(size = winsize,fullscr=False, units=\"pix\", screen=0)\n\n\n# Load images and video\nfixation = visual.ImageStim(win, image='EXP\\\\Stimuli\\\\fixation.png', size = (200, 200))\nVideo = visual.MovieStim(win, filename='EXP\\\\Stimuli\\\\Video60.mp4',  loop=False, size=[600,380],volume =0.4, autoStart=True)\n\n\n# Define the trigger and frame index variable to pass to the gaze_data_callback\ntrigger = ''\nframe_indx = np.nan\n\n\n\n#%% Record the data\n\n# Find all connected eye trackers\nfound_eyetrackers = tr.find_all_eyetrackers()\n\n# We will just use the first one\nEyetracker = found_eyetrackers[0]\n\n#Start recording\nEyetracker.subscribe_to(tr.EYETRACKER_GAZE_DATA, gaze_data_callback)\n\n# Crate empty list to append data\ngaze_data_buffer = []\n\nTrials_number = 10\nfor trial in range(Trials_number):\n\n    ### Present the fixation\n    win.flip() # we flip to clean the window\n\n\n    fixation.draw()\n    win.flip()\n    trigger = 'Fixation'\n    core.wait(1)  # wait for 1 second\n\n    Video.play()\n    trigger = 'Video'\n    while not Video.isFinished:\n\n        # Draw the video frame\n        Video.draw()\n\n        # Flip the window and add index to teh frame_indx\n        win.flip()\n\n        # add which frame was just shown to the eyetracking data\n        frame_indx = Video.frameIndex\n\n    Video.stop()\n    win.flip()\n\n\n    ### ISI\n    win.flip()    # we re-flip at the end to clean the window\n    clock = core.Clock()\n    write_buffer_to_file(gaze_data_buffer, 'DATA\\\\RAW\\\\Test.csv')\n    while clock.getTime() &lt; 1:\n        pass\n\n    ### Check for closing experiment\n    keys = event.getKeys() # collect list of pressed keys\n    if 'escape' in keys:\n        win.close()  # close window\n        Eyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback) # unsubscribe eyetracking\n        core.quit()  # stop study\n\nwin.close() # close window\nEyetracker.unsubscribe_from(tr.EYETRACKER_GAZE_DATA, gaze_data_callback) # unsubscribe eyetracking\ncore.quit() # stop study"
+  },
+  {
+    "objectID": "Workshops/2024_BTG/index.html#calibration",
+    "href": "Workshops/2024_BTG/index.html#calibration",
+    "title": "BTG 2024",
+    "section": "Calibration",
+    "text": "Calibration\nWe received a question about the calibration. How to change the focus time that the eye-tracking uses to record samples for each calibration point. Luckily, the function from the Psychopy_tobii_infant repository allows for an additional argument that specifies how long we want the focus time (default = 0.5s). Thus, you can simply change it by running it with a different value.\nHere below we changed the example of Calibrating eye-tracking by increasing the focus_time to 2s. You can increase or decrease it based on your needs!!\nimport os\nfrom psychopy import visual, sound\n\n# import Psychopy tobii infant\nos.chdir(r\"C:\\Users\\tomma\\Desktop\\EyeTracking\\Files\\Calibration\")\nfrom psychopy_tobii_infant import TobiiInfantController\n\n\n#%% window and stimuli\nwinsize = [1920, 1080]\nwin = visual.Window(winsize, fullscr=True, allowGUI=False,screen = 1, color = \"#a6a6a6\", unit='pix')\n\n# visual stimuli\nCALISTIMS = glob.glob(\"CalibrationStim\\\\*.png\")\n\n# video\nVideoGrabber = visual.MovieStim(win, \"CalibrationStim\\\\Attentiongrabber.mp4\", loop=True, size=[800,450],volume =0.4, unit = 'pix')\n\n# sound\nSound = sound.Sound(directory + \"CalibrationStim\\\\audio.wav\")\n\n\n#%% Center face - screen\n\n# set video playing\nVideoGrabber.setAutoDraw(True)\nVideoGrabber.play()\n\n# show the relative position of the subject to the eyetracker\nEyeTracker.show_status()\n\n# stop the attention grabber\nVideoGrabber.setAutoDraw(False)\nVideoGrabber.stop()\n\n\n#%% Calibration\n\n# define calibration points\nCALINORMP = [(-0.4, 0.4), (-0.4, -0.4), (0.0, 0.0), (0.4, 0.4), (0.4, -0.4)]\nCALIPOINTS = [(x * winsize[0], y * winsize[1]) for x, y in CALINORMP]\n\nsuccess = controller.run_calibration(CALIPOINTS, CALISTIMS, audio = Sound, focus_time=2)\nwin.flip()"
+  },
+  {
+    "objectID": "Workshops/2026_BCCCD/MaterialNeeded.html",
+    "href": "Workshops/2026_BCCCD/MaterialNeeded.html",
+    "title": "Material needed",
+    "section": "",
+    "text": "This workshop provides hands-on experience with generalized mixed effects models. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using R and Positron for conducting the analysis.\n\n\nInstalling R and Positron is straightforward. however if you do not have thme isntalled yet we suggest to follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. Simply click the buttons to see how to insta ll R and Rstudio on your operating system.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "crumbs": [
+      "DevStart",
+      "Needed Material"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_BCCCD/MaterialNeeded.html#pre-workshop-setup",
+    "href": "Workshops/2026_BCCCD/MaterialNeeded.html#pre-workshop-setup",
+    "title": "Material needed",
+    "section": "",
+    "text": "This workshop provides hands-on experience with generalized mixed effects models. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using R and Positron for conducting the analysis.\n\n\nInstalling R and Positron is straightforward. however if you do not have thme isntalled yet we suggest to follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. Simply click the buttons to see how to insta ll R and Rstudio on your operating system.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "crumbs": [
+      "DevStart",
+      "Needed Material"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_Chieti/MaterialNeeded.html",
+    "href": "Workshops/2026_Chieti/MaterialNeeded.html",
+    "title": "Material needed",
+    "section": "",
+    "text": "This workshop provides hands-on experience with eye-tracking data collection and analysis. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using Python and PsychoPy for experiment creation and data collection.\n\n\nTo ensure you’re ready for the workshop, please follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. If you’re new to these tools, simply click the buttons to navigate to the most relevant sections based on your experience level and goals.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nNoteInstallation Guide\n\n\n\nThe setup process typically takes 20-30 minutes, though some software can be complex to install. We’ve included alternative installation methods and solutions for common problems to ensure everything goes smoothly.\nPlease do not worry if something goes wrong, as these installations can sometimes be complicated. We will try to help you troubleshoot on the day of the workshop! If you encounter any major issues please email us at t.ghilardi@bbk.ac.uk.\n\n\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "crumbs": [
+      "DevStart",
+      "Needed Material"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_Chieti/MaterialNeeded.html#pre-workshop-setup",
+    "href": "Workshops/2026_Chieti/MaterialNeeded.html#pre-workshop-setup",
+    "title": "Material needed",
+    "section": "",
+    "text": "This workshop provides hands-on experience with eye-tracking data collection and analysis. In line with DevStart’s commitment to open science, we’ll use free, open-source software and programming languages throughout.\nWe’ll be using Python and PsychoPy for experiment creation and data collection.\n\n\nTo ensure you’re ready for the workshop, please follow our step-by-step installation guide. We’ve created interactive flowcharts on the DevStart website that walk you through installing everything you’ll need. If you’re new to these tools, simply click the buttons to navigate to the most relevant sections based on your experience level and goals.\nPlease complete the setup before the workshop begins.\n\n\n\n\n\n\nNoteInstallation Guide\n\n\n\nThe setup process typically takes 20-30 minutes, though some software can be complex to install. We’ve included alternative installation methods and solutions for common problems to ensure everything goes smoothly.\nPlease do not worry if something goes wrong, as these installations can sometimes be complicated. We will try to help you troubleshoot on the day of the workshop! If you encounter any major issues please email us at t.ghilardi@bbk.ac.uk.\n\n\n\n\n\n\n\n\nComplete Setup flowchart\n\n\n\n\nIn addition to the software, you’ll need to download materials we’ll use during the workshop. Please download these files and save them in a dedicated folder on your computer for easy access.\n\n Download files",
+    "crumbs": [
+      "DevStart",
+      "Needed Material"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_Chieti/index.html",
+    "href": "Workshops/2026_Chieti/index.html",
+    "title": "DevStart Workshops",
+    "section": "",
+    "text": "A Practical Introduction\n      to Eye-tracking for\n      Developmental Science",
+    "crumbs": [
+      "Chieti's Workshop"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_Chieti/index.html#about-the-workshop",
+    "href": "Workshops/2026_Chieti/index.html#about-the-workshop",
+    "title": "DevStart Workshops",
+    "section": "About the Workshop",
+    "text": "About the Workshop\nThis workshop, organized by Prof. Maria Spinelli, is led by the DevStart team and provides a practical introduction to eye-tracking methods in developmental science. Participants will learn the complete research pipeline—from designing developmental experimental paradigms, to collecting high-quality eye-tracking data and preprocessing it for analysis.\nThroughout the workshop, we’ll emphasize practical skills and best practices specific to developmental populations, including calibration techniques for young participants and handling common challenges when working with infants. All methods will be taught using open-source tools, primarily Python for experiment design and data collection.\nBy the end of the workshop, participants will have the foundational knowledge and practical experience needed to start their own eye-tracking research with developmental populations.\n\nView Full Program",
+    "crumbs": [
+      "Chieti's Workshop"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_Chieti/index.html#pre-workshop-preparation",
+    "href": "Workshops/2026_Chieti/index.html#pre-workshop-preparation",
+    "title": "DevStart Workshops",
+    "section": "Pre-Workshop Preparation",
+    "text": "Pre-Workshop Preparation\nTo ensure a smooth workshop experience, please install the required software and download necessary materials beforehand. All setup instructions and resources are available below:\n\nSoftware & Materials",
+    "crumbs": [
+      "Chieti's Workshop"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_Chieti/index.html#contact-us",
+    "href": "Workshops/2026_Chieti/index.html#contact-us",
+    "title": "DevStart Workshops",
+    "section": "Contact Us",
+    "text": "Contact Us\nIf you have any questions or need assistance with setup before the workshop, please contact us:\n\nTommaso Ghilardi: t.ghilardi@bbk.ac.uk\nFrancesco Poli: francesco.poli@mrc-cbu.cam.ac.uk\nGiulia Serino: g.serino@bbk.ac.uk",
+    "crumbs": [
+      "Chieti's Workshop"
+    ]
+  },
+  {
+    "objectID": "Workshops/2026_ICIS/index.html",
+    "href": "Workshops/2026_ICIS/index.html",
+    "title": "DevStart Workshops",
+    "section": "",
+    "text": "From Screen to Scene\n      Shared Principles in Screen-Based\n      and\n      Head-Mounted Eye-Tracking"
+  },
+  {
+    "objectID": "Workshops/2026_ICIS/index.html#workshop-overview",
+    "href": "Workshops/2026_ICIS/index.html#workshop-overview",
+    "title": "DevStart Workshops",
+    "section": "Workshop Overview",
+    "text": "Workshop Overview\nThis half-day workshop bridges the methodological gap between screen-based and head-mounted eye-tracking systems in infant research. Participants will develop a unified conceptual framework for understanding both approaches and gain practical implementation strategies for their own research.\nWe will compare how screen-based systems support precise measurement of gaze patterns to controlled stimuli, while head-mounted systems make it possible to study natural exploratory behavior and real-world object interactions. The main goal is to show that, despite differences in data collection, both approaches rely on shared analytical concepts."
+  },
+  {
+    "objectID": "Workshops/2026_ICIS/index.html#learning-objectives",
+    "href": "Workshops/2026_ICIS/index.html#learning-objectives",
+    "title": "DevStart Workshops",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of the workshop, participants will be able to:\n\nEvaluate whether screen-based or head-mounted eye-tracking best fits their research question.\nIdentify shared analytical principles across both systems.\nUnderstand how Areas of Interest and Time Windows of Interest transfer across paradigms.\nRecognize preprocessing challenges in head-mounted eye-tracking data.\nAdapt screen-based analytical frameworks to mobile eye-tracking contexts."
+  },
+  {
+    "objectID": "Workshops/2026_ICIS/index.html#practical-materials",
+    "href": "Workshops/2026_ICIS/index.html#practical-materials",
+    "title": "DevStart Workshops",
+    "section": "Practical Materials",
+    "text": "Practical Materials\nHere you can find simple Python examples for video tracking. These examples are intended as starting points for exploring tracking workflows after the workshop.\n\n Download Files \n\n\nScrips\ninside the dowloaded folder you will find two examples: - HandTracking_example.py - tracks hands in a video and saves hand landmark data. - ColorTracking_Example.py - tracks colored objects in a video and saves color position data.\n\n\nSetup\nInstall Pixi from pixi.sh/latest, then install the project environment from the downloaded folder:\npixi install"
+  },
+  {
+    "objectID": "Workshops/2026_ICIS/index.html#run-the-examples",
+    "href": "Workshops/2026_ICIS/index.html#run-the-examples",
+    "title": "DevStart Workshops",
+    "section": "Run The Examples",
+    "text": "Run The Examples\nRun the hand-tracking example:\npixi run python Examples/HandTracking_example.py\nRun the color-tracking example:\npixi run python Examples/ColorTracking_Example.py\nThe videos are not included in this folder. Use your own video and update the video path in the script if needed."
+  },
+  {
+    "objectID": "Workshops/2026_ICIS/index.html#models-and-inputs",
+    "href": "Workshops/2026_ICIS/index.html#models-and-inputs",
+    "title": "DevStart Workshops",
+    "section": "Models And Inputs",
+    "text": "Models And Inputs\nFor hand tracking, download the MediaPipe hand model from:\nMediaPipe hand landmarker model\nSave it as:\nModels/hand_landmarker.task\nThe color-tracking example does not need a model. It uses color ranges inside the script. You can adapt the HSV color ranges in COLOR_BANDS for your own video."
   }
 ]

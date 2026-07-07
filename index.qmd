@@ -54,10 +54,6 @@ library(readr)
 # Read timeline data
 timeline_data <- read_csv("WorkshopsTimeline.csv", show_col_types = FALSE)
 
-# Find the current event index
-current_indices <- which(timeline_data$current == "TRUE")
-current_index <- if(length(current_indices) > 0) current_indices[1] else NA
-
 # Build HTML string
 html_output <- '<div class="timeline-wrapper">\n  <div class="timeline-container">\n\n'
 
@@ -65,18 +61,17 @@ html_output <- '<div class="timeline-wrapper">\n  <div class="timeline-container
 for (i in 1:nrow(timeline_data)) {
   item <- timeline_data[i, ]
   
-  # Determine classes
+  # Determine classes from each CSV row: TRUE = active/upcoming, FALSE = past
+  current_value <- toupper(trimws(as.character(item$current)))
+  is_current <- !is.na(item$current) && current_value %in% c("TRUE", "1", "YES")
   classes <- "timeline-item"
-  if (!is.na(current_index) && i < current_index) {
+  if (!is_current) {
     classes <- paste(classes, "past")
   }
-  
-  # Add ID for current event
-  id_attr <- ""
-  if (!is.na(item$current) && item$current == "TRUE") {
-    id_attr <- ' id="current-event"'
-  }
-  
+
+  # Keep IDs unique even when several workshops are active/upcoming.
+  id_attr <- sprintf(' id="timeline-event-%s"', i)
+
   # Build location HTML (if location column exists)
   location_html <- ""
   if ("location" %in% names(item) && !is.na(item$location)) {
@@ -118,6 +113,23 @@ html_output <- paste0(html_output, '  </div>\n</div>\n')
 
 ```{=html}
 `r html_output`
+```
+
+```{=html}
+<script>
+  (() => {
+    const scrollTimelineToLatest = () => {
+      const timeline = document.querySelector('.timeline-wrapper');
+      if (!timeline) return;
+      timeline.scrollTop = timeline.scrollHeight;
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      requestAnimationFrame(scrollTimelineToLatest);
+    });
+    window.addEventListener('load', scrollTimelineToLatest);
+  })();
+</script>
 ```
 
 ## Interested in Hosting a Workshop?
